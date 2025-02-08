@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "EcoLand.app"
-               BlueprintName = "EcoLand"
-               ReferencedContainer = "container:EcoLand.xcodeproj">
+               BuildableName = "SmartIrrigation.app"
+               BlueprintName = "SmartIrrigation"
+               ReferencedContainer = "container:SmartIrrigation.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "EcoLandTests.xctest"
-               BlueprintName = "EcoLandTests"
-               ReferencedContainer = "container:EcoLand.xcodeproj">
+               BuildableName = "SmartIrrigationTests.xctest"
+               BlueprintName = "SmartIrrigationTests"
+               ReferencedContainer = "container:SmartIrrigation.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "EcoLand.app"
-            BlueprintName = "EcoLand"
-            ReferencedContainer = "container:EcoLand.xcodeproj">
+            BuildableName = "SmartIrrigation.app"
+            BlueprintName = "SmartIrrigation"
+            ReferencedContainer = "container:SmartIrrigation.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "EcoLand.app"
-            BlueprintName = "EcoLand"
-            ReferencedContainer = "container:EcoLand.xcodeproj">
+            BuildableName = "SmartIrrigation.app"
+            BlueprintName = "SmartIrrigation"
+            ReferencedContainer = "container:SmartIrrigation.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

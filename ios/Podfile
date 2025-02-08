@@ -14,7 +14,7 @@ if linkage != nil
   # use_frameworks! :linkage => linkage.to_sym
 end
 
-target 'EcoLand' do
+target 'SmartIrrigation' do
   config = use_native_modules!
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
@@ -24,7 +24,7 @@ target 'EcoLand' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
-  target 'EcoLandTests' do
+  target 'SmartIrrigationTests' do
     inherit! :complete
     # Pods for testing
   end

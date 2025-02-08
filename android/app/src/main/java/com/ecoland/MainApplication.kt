@@ -1,4 +1,4 @@
-package com.ecoland
+package com.SmartIrrigation
 
 import android.app.Application
 import com.facebook.react.PackageList
