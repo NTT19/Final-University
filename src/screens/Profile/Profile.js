@@ -21,7 +21,7 @@ export default function Profile() {
 
                    <Text style={[style.apptitle,{}]}>Profile</Text>
 
-                   <Image source={require('../../../assets/image/a14.png')} resizeMode='stretch' style={{height:100,width:95,alignSelf:'center',marginTop:20}}></Image>
+                   <Image source={require('../../../assets/image/profile.png')} resizeMode='stretch' style={{height:100,width:95,alignSelf:'center',marginTop:20}}></Image>
 
                    <Text style={[style.subtitle,{textAlign:'center'}]}>NTT19</Text>
                    <Text style={[style.s16,{textAlign:'center',color:Colors.icon}]}>IOT</Text>
