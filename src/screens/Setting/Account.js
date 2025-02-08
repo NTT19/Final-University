@@ -88,17 +88,7 @@ export default function Account() {
                                     value={ison2}
                                 />
                             </View>
-                            <View style={[style.list, { marginTop: 15 }]}>
-                                <Icon name='logo-dribbble' size={22} style={{ color: '#EC4989' }}></Icon>
-                                <Text style={[style.s16, { marginLeft: 12, flex: 1 }]}>Dribble</Text>
-                                <Switch
-                                    trackColor={{ false: Colors.icon, true: Colors.primary }}
-                                    thumbColor={ison3 ? Colors.secondary : '#f4f3f4'}
-                                    ios_backgroundColor="#3e3e3e"
-                                    onValueChange={toggle3}
-                                    value={ison3}
-                                />
-                            </View>
+                           
                         </View>
 
                     </ScrollView>

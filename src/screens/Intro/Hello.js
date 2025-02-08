@@ -16,7 +16,7 @@ export default function Hello() {
             <KeyboardAvoidingView style={{ flex: 1 }} behavior={Platform.OS === 'ios' ? 'padding' : null} >
                 <View style={[style.main, { marginTop: 10, }]}>
 
-                    <Image source={require('../../../assets/image/Logo.png')} resizeMode='stretch' style={{ height: 120, width: 120, marginTop: 20 }} />
+               <Image source={require('../../../assets/image/Logo.png')} resizeMode='stretch' style={{ height: 120, width: 120, marginTop: 20 }} />
 
                     <Text style={[style.s42, { marginTop: 10 }]}>Everyone should live with a little more green</Text>
 

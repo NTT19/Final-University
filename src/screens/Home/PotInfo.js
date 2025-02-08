@@ -65,10 +65,10 @@ export default function PotInfo() {
                                     <Icon name='thermometer-outline' size={20} color={Colors.primary} />
                                     <Text style={[style.s14, { marginLeft: 7 }]}>Best at 18°C - 30°C</Text>
                                 </View>
-                                <View style={[style.list, { marginTop: 7 }]}>
-                                    <Image source={require('../../../assets/image/s18.png')} resizeMode='stretch' style={{ height: 20, width: 20 }} />
-                                    <Text style={[style.s14, { marginLeft: 7 }]}>Sprouts in: 7 - 14 days</Text>
-                                </View>
+                             {/*    <View style={[style.list, { marginTop: 7 }]}>
+                               <Image source={require('../../../assets/image/s18.png')} resizeMode='stretch' style={{ height: 20, width: 20 }} />   
+                                    <Text style={[style.s14, { marginLeft: 7 }]}>Sprouts in: 7 - 14 days</Text>   
+                                </View>   */}  
                                 <View style={[style.list, { marginTop: 7 }]}>
                                     <Icon name='heart-outline' size={20} color={Colors.primary} />
                                     <Text style={[style.s14, { marginLeft: 7 }]}>Enjoy for: 90 - 112 days</Text>

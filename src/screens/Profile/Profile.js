@@ -23,12 +23,12 @@ export default function Profile() {
 
                    <Image source={require('../../../assets/image/a14.png')} resizeMode='stretch' style={{height:100,width:95,alignSelf:'center',marginTop:20}}></Image>
 
-                   <Text style={[style.subtitle,{textAlign:'center'}]}>Alice O’Donnell</Text>
-                   <Text style={[style.s16,{textAlign:'center',color:Colors.icon}]}>UX Designer</Text>
+                   <Text style={[style.subtitle,{textAlign:'center'}]}>NTT19</Text>
+                   <Text style={[style.s16,{textAlign:'center',color:Colors.icon}]}>IOT</Text>
 
                     <ScrollView showsVerticalScrollIndicator={false} style={{marginTop:30}}>
 
-                        <TouchableOpacity onPress={() => navigation.navigate('MyInfo')} style={[style.box,style.list,style.shadow,{backgroundColor:Colors.bg,margin:5 ,marginTop:15}]}>
+                        <TouchableOpacity /*  onPress={() => navigation.navigate('MyInfo')} */ style={[style.box,style.list,style.shadow,{backgroundColor:Colors.bg,margin:5 ,marginTop:15}]}>
                             <View style={[style.icon,{height:34,width:34,}]}>
                                 <Icon name='person-outline' size={18} color={Colors.primary}></Icon>
                             </View>
@@ -39,7 +39,7 @@ export default function Profile() {
                             </View>
                         </TouchableOpacity>
 
-                        <TouchableOpacity onPress={() => navigation.navigate('PayH')} style={[style.box,style.list,style.shadow,{backgroundColor:Colors.bg,margin:5 ,marginTop:15}]}>
+                 {/*      <TouchableOpacity  onPress={() => navigation.navigate('PayH')}  style={[style.box,style.list,style.shadow,{backgroundColor:Colors.bg,margin:5 ,marginTop:15}]}>
                             <View style={[style.icon,{height:34,width:34,}]}>
                                 <Icon name='phone-portrait-outline' size={18} color={Colors.primary}></Icon>
                             </View>
@@ -49,8 +49,8 @@ export default function Profile() {
                                 <Text style={[style.s12,{color:Colors.icon,marginTop:3}]}>Record of your monthly payment</Text>
                             </View>
                         </TouchableOpacity>
-
-                        <TouchableOpacity onPress={() => navigation.navigate('MyOrder')} style={[style.box,style.list,style.shadow,{backgroundColor:Colors.bg,margin:5 ,marginTop:15,marginBottom:20}]}>
+                        */}  
+                        {/* <TouchableOpacity onPress={() => navigation.navigate('MyOrder')} style={[style.box,style.list,style.shadow,{backgroundColor:Colors.bg,margin:5 ,marginTop:15,marginBottom:20}]}>
                             <View style={[style.icon,{height:34,width:34,}]}>
                                 <Icon name='cart-outline' size={18} color={Colors.primary}></Icon>
                             </View>
@@ -59,7 +59,7 @@ export default function Profile() {
                                 <Text style={[style.b16]}>My Orders</Text>
                                 <Text style={[style.s12,{color:Colors.icon,marginTop:3}]}>See what you have ordered </Text>
                             </View>
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
 
                     </ScrollView>
                 </View>

@@ -35,7 +35,7 @@ export default function Setting() {
 
                         <Text style={[style.subtitle]}>App Settings</Text>
 
-                        <TouchableOpacity onPress={() => navigation.navigate('Wifi')} style={[style.box,style.list,style.shadow,{backgroundColor:Colors.bg,margin:5 ,marginTop:15}]}>
+                        <TouchableOpacity /*onPress={() => navigation.navigate('Wifi')} */ style={[style.box,style.list,style.shadow,{backgroundColor:Colors.bg,margin:5 ,marginTop:15}]}>
                             <View style={[style.icon,{height:34,width:34,}]}>
                                 <Icon name='wifi' size={18} color={Colors.primary}></Icon>
                             </View>
@@ -46,7 +46,7 @@ export default function Setting() {
                             </View>
                         </TouchableOpacity>
 
-                        <TouchableOpacity onPress={() => navigation.navigate('Notify')} style={[style.box,style.list,style.shadow,{backgroundColor:Colors.bg,margin:5 ,marginTop:15}]}>
+                        <TouchableOpacity  /* onPress={() => navigation.navigate('Notify')} */ style={[style.box,style.list,style.shadow,{backgroundColor:Colors.bg,margin:5 ,marginTop:15}]}>
                             <View style={[style.icon,{height:34,width:34,}]}>
                                 <Icon name='notifications-outline' size={18} color={Colors.primary}></Icon>
                             </View>
@@ -59,7 +59,7 @@ export default function Setting() {
 
                         <Text style={[style.subtitle,{marginTop:20}]}>Account & Support</Text>
 
-                        <TouchableOpacity onPress={() => navigation.navigate('Account')} style={[style.box,style.list,style.shadow,{backgroundColor:Colors.bg,margin:5 ,marginTop:15}]}>
+                        <TouchableOpacity /* onPress={() => navigation.navigate('Account')} */ style={[style.box,style.list,style.shadow,{backgroundColor:Colors.bg,margin:5 ,marginTop:15}]}>
                             <View style={[style.icon,{height:34,width:34,}]}>
                                 <Icon name='person-outline' size={18} color={Colors.primary}></Icon>
                             </View>

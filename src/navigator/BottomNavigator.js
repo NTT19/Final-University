@@ -31,13 +31,13 @@ export default function MyTabs() {
             <Text style={[style.s15, { color: focused ? Colors.primary : Colors.icon, }]}>Garden</Text>
           ),
           tabBarIcon: ({ focused, color }) => {
-            return <Image source={focused ? require('../../assets/image/t1f.png') : require('../../assets/image/t1.png')} style={{ height: 24, width: 24 }} />
+            return <Image source={focused ? require('../../assets/image/t1.png') : require('../../assets/image/t1.png')} style={{ height: 24, width: 24 }} />
           },
           headerShown: false,
         }}
       />
 
-      <Tab.Screen name="Store" component={Store}
+      {/* <Tab.Screen name="Store" component={Store}
         options={{
           tabBarShowLabel: true,
           tabBarLabel: ({ focused, color, }) => (
@@ -45,10 +45,10 @@ export default function MyTabs() {
           ),
 
           tabBarIcon: ({ focused, color }) => {
-            return <Image source={focused ? require('../../assets/image/t2f.png') : require('../../assets/image/t2.png')} style={{ height: 24, width: 24 }} />
+            return <Image source={focused ? require('../../assets/image/t2.png') : require('../../assets/image/t2.png')} style={{ height: 24, width: 24 }} />
           },
           headerShown: false,
-        }} />
+        }} /> */}
 
       <Tab.Screen name="Setting" component={Setting}
         options={{
@@ -58,7 +58,7 @@ export default function MyTabs() {
           ),
 
           tabBarIcon: ({ focused, color }) => {
-            return <Image source={focused ? require('../../assets/image/t3f.png') : require('../../assets/image/t3.png')} style={{ height: 24, width: 24 }} />
+            return <Image source={focused ? require('../../assets/image/t3.png') : require('../../assets/image/t3.png')} style={{ height: 24, width: 24 }} />
           },
           headerShown: false,
         }} />
@@ -71,7 +71,7 @@ export default function MyTabs() {
           ),
 
           tabBarIcon: ({ focused, color }) => {
-            return <Image source={focused ? require('../../assets/image/t4f.png') : require('../../assets/image/t4.png')} style={{ height: 24, width: 24 }} />
+            return <Image source={focused ? require('../../assets/image/t4.png') : require('../../assets/image/t4.png')} style={{ height: 24, width: 24 }} />
           },
           headerShown: false,
         }} />

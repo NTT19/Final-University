@@ -30,13 +30,13 @@ export default function Intro1() {
 
                     <View style={{ flex: 1, justifyContent: 'space-around' }}>
 
-                        <Text style={[style.title]}>Unbox Me</Text>
+                        <Text style={[style.title]}>Take Care Of Me</Text>
 
                         <Image source={require('../../../assets/image/s2.png')} resizeMode='stretch' style={{ height: height / 4, width: width / 1.5, alignSelf: 'center' }} />
 
                         <Text style={[style.title, { fontSize: 26, textAlign: 'center', }]}>Check components</Text>
 
-                        <Text style={[style.s14, { color: Colors.dis, textAlign: 'center' }]}>Your smart garden package contains your garden, a package of sensors, sensors holder, Germination Domes and Power Adapter</Text>
+                        <Text style={[style.s14, { color: Colors.dis, textAlign: 'center' }]}>Your smart garden package contains your garden, a package of sensors, sensors holder and Power Adapter</Text>
 
                         <TouchableOpacity onPress={() => navigation.navigate('Intro2')} style={[style.btn, { marginBottom: 20 }]}>
                             <Text style={[style.btntxt]}>Confirm</Text>

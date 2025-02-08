@@ -22,15 +22,15 @@ export default function Home() {
                         elevation={0}
                         color={Colors.bg}
                         leading={<Text style={[style.s42]}>My Gardens</Text>}
-                        trailing={<TouchableOpacity onPress={()=>navigation.navigate('AddPot')}>
-                            <Icon name='add-circle-outline' size={24} color={Colors.primary} />
-                        </TouchableOpacity>}
+                        // trailing={<TouchableOpacity onPress={()=>navigation.navigate('AddPot')}>
+                        //     <Icon name='add-circle-outline' size={24} color={Colors.primary} />
+                        // </TouchableOpacity>}
                     />
 
                     <View style={[style.list, { marginTop: 10 }]}>
-                        <TouchableOpacity onPress={() => { setshow1(true), setshow(false) }}>
+                        {/* <TouchableOpacity onPress={() => { setshow1(true), setshow(false) }}>
                             <Icon name='grid-outline' size={24} color={show1 ? Colors.txt : Colors.icon} />
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
                         <TouchableOpacity onPress={() => { setshow(true), setshow1(false) }}>
                             <Image source={show ? require('../../../assets/image/s7d.png') : require('../../../assets/image/s7.png')} resizeMode='stretch' style={{ height: 24, width: 24, marginLeft: 10 }} />
                         </TouchableOpacity>
