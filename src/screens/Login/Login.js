@@ -6,13 +6,35 @@ import { useNavigation } from '@react-navigation/native';
 import { AppBar } from '@react-native-material/core';
 import Icon from 'react-native-vector-icons/Ionicons';
 import CheckBox from 'react-native-check-box';
+import loginApi from '../../api/loginApi';
 
 const width = Dimensions.get('screen').width
 const height = Dimensions.get('screen').height
 
-export default function Login() {
+    const Login= () => {
     const navigation = useNavigation();
     const [isSelected, setIsSelected] = useState(false)
+    const [phone, setPhone] = useState("");  // State cho phone
+    const [password, setPassword] = useState("");  // State cho password
+    const [loading, setLoading] = useState(false);  // Trạng thái loading khi gọi API
+    const [error, setError] = useState(null);  // Lỗi khi đăng nhập thất bại
+
+
+    const handleLogin = async () => {
+        setLoading(true);
+        setError(null);
+
+        try {
+            const response = await loginApi.login(email, password);  
+            const token = response.data.token; 
+            navigation.replace('Home'); 
+        } catch (err) {
+            setError('Login failed. Please check your credentials.');
+        } finally {
+            setLoading(false);
+        }
+
+};
 
     return (
         <SafeAreaView style={[style.area, { backgroundColor: Colors.bg }]}>
@@ -43,10 +65,12 @@ export default function Login() {
                         </View>
 
                         <View style={[style.txtinput, { marginTop: 40, }]}>
-                            <TextInput placeholder='Email'
+                            <TextInput placeholder='Phone'
                                 placeholderTextColor={Colors.icon}
                                 selectionColor={Colors.primary}
                                 style={[style.s16, { color: Colors.txt, flex: 1 }]}
+                                value={phone}
+                                onChangeText={setPhone}
                             />
                         </View>
 
@@ -55,6 +79,8 @@ export default function Login() {
                                 placeholderTextColor={Colors.icon}
                                 selectionColor={Colors.primary}
                                 style={[style.s16, { color: Colors.txt, flex: 1 }]}
+                                value={password}
+                                onChangeText={setPassword}
                             />
                         </View>
 
@@ -69,10 +95,16 @@ export default function Login() {
                             </TouchableOpacity>
                         </View>
 
-                        <TouchableOpacity onPress={() => navigation.navigate('MyTabs')}
+                        <TouchableOpacity onPress={handleLogin}
                             style={[style.btn, { marginTop: 50, height: 48 }]}>
-                            <Text style={style.btntxt}>Sign in</Text>
+                                  {loading ? (
+                                <ActivityIndicator size="small" color={Colors.white} />
+                            ) : (
+                            <Text style={style.btntxt}>Sign in</Text>)}
                         </TouchableOpacity>
+                         {/* Error message */}
+                        {error && <Text style={{ color: 'red', marginTop: 10, marginLeft: 50 }}>{error}</Text>}
+
 
                         <View style={[style.list, { justifyContent: 'center', marginVertical: 20 }]}>
                             <View style={[style.divider, { backgroundColor: Colors.dis, width: 30 }]}></View>
@@ -93,4 +125,6 @@ export default function Login() {
             </KeyboardAvoidingView>
         </SafeAreaView>
     )
-}
+};
+
+export default Login;
