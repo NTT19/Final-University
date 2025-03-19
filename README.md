@@ -1,6 +1,16 @@
-điều khiển: thủ công, tự động (cảm biến), tự động (thời ) 
-api hiển thị camera 
-chatbot
-Full tiếng việt
-format color trùng với web
-api thời tiết
+# Công việc cần thực hiện
+
+- [ ] **Điều khiển:**
+  - [ ] Thủ công
+  - [ ] Tự động (cảm biến)
+  - [ ] Tự động (thời gian)
+
+- [ ] **API hiển thị camera**
+
+- [ ] **Chatbot**
+
+- [ ] **Full tiếng Việt**
+
+- [ ] **Format màu trùng với website**
+
+- [ ] **API thời tiết**
