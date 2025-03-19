@@ -28,16 +28,16 @@ export default function Intro() {
 
                     <View style={{ flex: 1, justifyContent: 'space-around' }}>
 
-                        <Text style={[style.title]}>Hello!</Text>
+                        <Text style={[style.title]}>Xin chào!</Text>
 
                         <Image source={require('../../../assets/image/s1.png')} resizeMode='stretch' style={{ height: height / 4, width: width / 1.5, alignSelf: 'center' }} />
 
-                        <Text style={[style.title, { fontSize: 26, textAlign: 'center', }]}>Let’s get your new smart garden set up.</Text>
+                        <Text style={[style.title, { fontSize: 26, textAlign: 'center', }]}>Hãy cùng thiết lập khu vườn thông minh mới của bạn</Text>
 
-                        <Text style={[style.s14, { color: Colors.dis, textAlign: 'center' }]}>For the next steps, make sure you have your wifi name and password handy.</Text>
+                        <Text style={[style.s14, { color: Colors.dis, textAlign: 'center' }]}>Hãy đảm bảo kết nối Wifi luôn sẵn sàng.</Text>
 
                         <TouchableOpacity onPress={() => navigation.navigate('Intro1')} style={[style.btn, { marginBottom: 20 }]}>
-                            <Text style={[style.btntxt]}>Next</Text>
+                            <Text style={[style.btntxt]}>Tiếp tục</Text>
                         </TouchableOpacity>
 
                     </View>

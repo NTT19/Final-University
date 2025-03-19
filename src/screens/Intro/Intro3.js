@@ -30,17 +30,17 @@ export default function Intro3() {
 
                     <View style={{ flex: 1, justifyContent: 'space-around' }}>
 
-                        <Text style={[style.title]}>WiFi Paring</Text>
+                        <Text style={[style.title]}>Kết nối Wifi</Text>
 
                         <Image source={require('../../../assets/image/s4.png')} resizeMode='stretch' style={{ height: height / 4, width: width / 1.8, alignSelf: 'center' }} />
 
-                        <Text style={[style.title, { fontSize: 26, textAlign: 'center', }]}>Connect to a Network</Text>
+                        <Text style={[style.title, { fontSize: 26, textAlign: 'center', }]}>Kết nối với mạng</Text>
 
-                        <Text style={[style.s14, { color: Colors.dis, textAlign: 'center' }]}>Next, we’ll need to connect your device to the
-                            internet so we can update its firmware and active its smart garden features.</Text>
+                        <Text style={[style.s14, { color: Colors.dis, textAlign: 'center' }]}>Tiếp theo, chúng ta cần kết nối thiết bị của bạn với Internet để có thể cập nhật chương trình 
+                            và kích hoạt các tính năng làm vườn thông minh của thiết bị.</Text>
 
                         <TouchableOpacity onPress={() => navigation.navigate('Intro4')} style={[style.btn, { marginBottom: 20 }]}>
-                            <Text style={[style.btntxt]}>Next</Text>
+                            <Text style={[style.btntxt]}>Tiếp tục</Text>
                         </TouchableOpacity>
 
                     </View>

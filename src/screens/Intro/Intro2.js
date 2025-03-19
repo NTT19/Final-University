@@ -30,18 +30,16 @@ export default function Intro2() {
 
                     <View style={{ flex: 1, justifyContent: 'space-around' }}>
 
-                        <Text style={[style.title]}>Rise & Shine</Text>
+                        <Text style={[style.title]}>Thức dậy & toả sáng</Text>
 
                         <Image source={require('../../../assets/image/s3.png')} resizeMode='stretch' style={{ height: height / 4, width: width / 1.8, alignSelf: 'center' }} />
 
-                        <Text style={[style.title, { fontSize: 26, textAlign: 'center', }]}>Wait for your device to
-fully turn on.</Text>
+                        <Text style={[style.title, { fontSize: 26, textAlign: 'center', }]}>Chờ thiết bị của bạn đã bật hoàn toàn.</Text>
 
-                        <Text style={[style.s14, { color: Colors.dis, textAlign: 'center' }]}>You’ll know when the device’s LED lights 
-start pulsing white</Text>
+                        <Text style={[style.s14, { color: Colors.dis, textAlign: 'center' }]}>Bạn sẽ nhận biết được khi nào đèn LED của thiết bị bắt đầu nhấp nhảy màu trắng</Text>
 
                         <TouchableOpacity onPress={() => navigation.navigate('Intro3')} style={[style.btn, { marginBottom: 20 }]}>
-                            <Text style={[style.btntxt]}>Next</Text>
+                            <Text style={[style.btntxt]}>Tiếp tục</Text>
                         </TouchableOpacity>
 
                     </View>

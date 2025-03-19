@@ -55,17 +55,17 @@ const height = Dimensions.get('screen').height
 
                     <ScrollView showsVerticalScrollIndicator={false} style={{}}>
 
-                        <Text style={[style.title]}>Sign in</Text>
+                        <Text style={[style.title]}>Đăng nhập</Text>
 
                         <View style={[style.list, { marginTop: 5, }]}>
-                            <Text style={[style.s14, { color: Colors.dis }]}>Don’t have an account?</Text>
+                            <Text style={[style.s14, { color: Colors.dis }]}>Bạn chưa có tài khoản?</Text>
                             <TouchableOpacity onPress={() => navigation.navigate('Signup')}>
-                                <Text style={[style.s14, { color: Colors.primary }]}> Sign up now!</Text>
+                                <Text style={[style.s14, { color: Colors.primary }]}>Đăng ký ngay!</Text>
                             </TouchableOpacity>
                         </View>
 
                         <View style={[style.txtinput, { marginTop: 40, }]}>
-                            <TextInput placeholder='Phone'
+                            <TextInput placeholder='Số điện thoại'
                                 placeholderTextColor={Colors.icon}
                                 selectionColor={Colors.primary}
                                 style={[style.s16, { color: Colors.txt, flex: 1 }]}
@@ -75,7 +75,7 @@ const height = Dimensions.get('screen').height
                         </View>
 
                         <View style={[style.txtinput, { marginTop: 30, }]}>
-                            <TextInput placeholder='Password'
+                            <TextInput placeholder='Mật khẩu'
                                 placeholderTextColor={Colors.icon}
                                 selectionColor={Colors.primary}
                                 style={[style.s16, { color: Colors.txt, flex: 1 }]}
@@ -89,9 +89,9 @@ const height = Dimensions.get('screen').height
                                 onClick={() => setIsSelected(!isSelected)}
                                 checkBoxColor={Colors.primary}
                             />
-                            <Text style={[style.s14, { color: Colors.icon, flex: 1, marginLeft: 7 }]}>Remember me</Text>
+                            <Text style={[style.s14, { color: Colors.icon, flex: 1, marginLeft: 7 }]}>Nhớ mật khẩu</Text>
                             <TouchableOpacity onPress={() => navigation.navigate('Forgot')}>
-                                <Text style={[style.s14, { color: Colors.dis, }]}>Forgot Password?</Text>
+                                <Text style={[style.s14, { color: Colors.dis, }]}>Quên mật khẩu?</Text>
                             </TouchableOpacity>
                         </View>
 
@@ -100,7 +100,7 @@ const height = Dimensions.get('screen').height
                                   {loading ? (
                                 <ActivityIndicator size="small" color={Colors.white} />
                             ) : (
-                            <Text style={style.btntxt}>Sign in</Text>)}
+                            <Text style={style.btntxt}>Đăng nhập</Text>)}
                         </TouchableOpacity>
                          {/* Error message */}
                         {error && <Text style={{ color: 'red', marginTop: 10, marginLeft: 50 }}>{error}</Text>}
@@ -108,7 +108,7 @@ const height = Dimensions.get('screen').height
 
                         <View style={[style.list, { justifyContent: 'center', marginVertical: 20 }]}>
                             <View style={[style.divider, { backgroundColor: Colors.dis, width: 30 }]}></View>
-                            <Text style={[style.s14, { color: Colors.dis, marginHorizontal: 10 }]}>OR</Text>
+                            <Text style={[style.s14, { color: Colors.dis, marginHorizontal: 10 }]}>Lựa chọn khác</Text>
                             <View style={[style.divider, { backgroundColor: Colors.dis, width: 30 }]}></View>
                         </View>
 

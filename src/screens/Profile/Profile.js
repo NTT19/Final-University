@@ -19,7 +19,7 @@ export default function Profile() {
 
                 <View style={[style.main, { marginTop: Platform.OS === 'ios' ? 10 : 10, }]}>
 
-                   <Text style={[style.apptitle,{}]}>Profile</Text>
+                   <Text style={[style.apptitle,{}]}>Hồ sơ</Text>
 
                    <Image source={require('../../../assets/image/profile.png')} resizeMode='stretch' style={{height:100,width:95,alignSelf:'center',marginTop:20}}></Image>
 
@@ -34,8 +34,8 @@ export default function Profile() {
                             </View>
                             <View style={[style.verticaldivider,{marginHorizontal:15}]}></View>
                             <View style={{flex:1}}>
-                                <Text style={[style.b16]}>My Info</Text>
-                                <Text style={[style.s12,{color:Colors.icon,marginTop:3}]}>Personal info, payment method,...</Text>
+                                <Text style={[style.b16]}>Thông tin của tôi</Text>
+                                <Text style={[style.s12,{color:Colors.icon,marginTop:3}]}>Thông tin cá nhân....</Text>
                             </View>
                         </TouchableOpacity>
 

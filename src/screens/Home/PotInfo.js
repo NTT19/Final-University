@@ -46,10 +46,9 @@ export default function PotInfo() {
 
                     <ScrollView showsVerticalScrollIndicator={false} style={{ marginTop: 15 }}>
 
-                        <Text style={[style.s42]}>Ailanthus</Text>
+                        <Text style={[style.s42]}>Cây mít</Text>
 
-                        <Text style={[style.r20, { color: Colors.dis }]}>Robust and dramatic,
-                            with no leaves.</Text>
+                        {/* <Text style={[style.r20, { color: Colors.dis }]}>...</Text> */}
 
                         <View style={[style.box1, style.shadow, style.list, { margin: 5, marginTop: 15 }]}>
                             <View style={{ flex: 1 }}>
@@ -68,7 +67,7 @@ export default function PotInfo() {
                              {/*    <View style={[style.list, { marginTop: 7 }]}>
                                <Image source={require('../../../assets/image/s18.png')} resizeMode='stretch' style={{ height: 20, width: 20 }} />   
                                     <Text style={[style.s14, { marginLeft: 7 }]}>Sprouts in: 7 - 14 days</Text>   
-                                </View>   */}  
+                                </View>   */}
                                 <View style={[style.list, { marginTop: 7 }]}>
                                     <Icon name='heart-outline' size={20} color={Colors.primary} />
                                     <Text style={[style.s14, { marginLeft: 7 }]}>Enjoy for: 90 - 112 days</Text>

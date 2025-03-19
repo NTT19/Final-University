@@ -30,16 +30,16 @@ export default function Intro6() {
 
                     <View style={{ flex: 1, justifyContent: 'space-around' }}>
 
-                        <Text style={[style.title]}>Done</Text>
+                        <Text style={[style.title]}>Hoàn thành</Text>
 
                         <Image source={require('../../../assets/image/s6.png')} resizeMode='stretch' style={{ height: height / 4, width: width / 1.8, alignSelf: 'center' }} />
 
-                        <Text style={[style.title, { fontSize: 26, textAlign: 'center', }]}>All Set!</Text>
+                        <Text style={[style.title, { fontSize: 26, textAlign: 'center', }]}>Tất cả đã hoàn thành!</Text>
 
-                        <Text style={[style.s14, { color: Colors.dis, textAlign: 'center' }]}>Now, enjoy your new smart garden</Text>
+                        <Text style={[style.s14, { color: Colors.dis, textAlign: 'center' }]}>Bây giờ, hãy chăm sóc khu vườn thông minh mới của bạn</Text>
 
                         <TouchableOpacity onPress={() => navigation.navigate('Hello')} style={[style.btn, { marginBottom: 20 }]}>
-                            <Text style={[style.btntxt]}>Done</Text>
+                            <Text style={[style.btntxt]}>Tiếp tục</Text>
                         </TouchableOpacity>
 
                     </View>

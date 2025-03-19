@@ -28,9 +28,9 @@ export default function Otp() {
 
                     <ScrollView showsVerticalScrollIndicator={false} style={{ marginTop: 15 }}>
 
-                        <Text style={[style.title]}>Recovery</Text>
+                        <Text style={[style.title]}>Khôi phục tài khoản</Text>
 
-                        <Text style={[style.s14, { color: Colors.dis, marginTop: 5 }]}>Enter recovery code we’ve sent you</Text>
+                        <Text style={[style.s14, { color: Colors.dis, marginTop: 5 }]}>Nhập mã khôi phục chúng tôi đã gửi cho bạn</Text>
 
                         <OtpInputs
                             Clipboard={Clipboard}
@@ -54,7 +54,7 @@ export default function Otp() {
                     </ScrollView>
 
                     <TouchableOpacity onPress={() => navigation.navigate('NPass')} style={[style.btn, { marginVertical: 20 }]}>
-                            <Text style={[style.btntxt]}>Done</Text>
+                            <Text style={[style.btntxt]}>Tiếp tục</Text>
                         </TouchableOpacity>
 
                 </View>

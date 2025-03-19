@@ -31,17 +31,17 @@ export default function Signup() {
 
                     <ScrollView showsVerticalScrollIndicator={false} style={{  }}>
 
-                        <Text style={[style.title]}>Sign up</Text>
+                        <Text style={[style.title]}>Đăng ký</Text>
 
                         <View style={[{ marginTop: 5,}]}>
-                            <Text style={[style.s14, { color: Colors.dis, }]}>Enter your email and password for sign up or</Text>
+                            <Text style={[style.s14, { color: Colors.dis, }]}>Nhập số điện thoại và mật khẩu của bạn để đăng ký hoặc</Text>
                             <TouchableOpacity onPress={() => navigation.navigate('Login')} >
-                                <Text style={[style.s14, { color: Colors.primary , }]}>Already have an account?</Text>
+                                <Text style={[style.s14, { color: Colors.primary , }]}>Bạn đã có tài khoản?</Text>
                             </TouchableOpacity>
                         </View>
 
                         <View style={[style.txtinput, { marginTop: 40, }]}>
-                            <TextInput placeholder='Email' 
+                            <TextInput placeholder='Số điện thoại' 
                                 placeholderTextColor={Colors.icon}
                                 selectionColor={Colors.primary}
                                 style={[style.s16, { color: Colors.txt, flex:1}]}
@@ -49,7 +49,7 @@ export default function Signup() {
                         </View>
 
                         <View style={[style.txtinput, { marginTop: 20, }]}>
-                            <TextInput placeholder='Password' 
+                            <TextInput placeholder='Mật khẩu' 
                                 placeholderTextColor={Colors.icon}
                                 selectionColor={Colors.primary}
                                 secureTextEntry={!isPasswordVisible}
@@ -61,7 +61,7 @@ export default function Signup() {
                         </View>
 
                         <View style={[style.txtinput, { marginTop: 20, }]}>
-                            <TextInput placeholder='Confirm Password' 
+                            <TextInput placeholder='Nhập lại mật khẩu' 
                                 placeholderTextColor={Colors.icon}
                                 selectionColor={Colors.primary}
                                 secureTextEntry={!isPasswordVisible1}
@@ -74,12 +74,12 @@ export default function Signup() {
 
                         <TouchableOpacity onPress={()=>navigation.navigate('MyTabs')} 
                             style={[style.btn, { marginTop: 60 ,height:48}]}>
-                            <Text style={style.btntxt}>Create new account</Text>
+                            <Text style={style.btntxt}>Tạo tài khoản mới</Text>
                         </TouchableOpacity>
 
                         <View style={[style.list,{justifyContent:'center',marginVertical:20}]}>
                             <View style={[style.divider,{backgroundColor:Colors.dis,width:30}]}></View>
-                            <Text style={[style.s14,{color:Colors.dis,marginHorizontal:10}]}>OR</Text>
+                            <Text style={[style.s14,{color:Colors.dis,marginHorizontal:10}]}>Lựa chọn khác</Text>
                             <View style={[style.divider,{backgroundColor:Colors.dis,width:30}]}></View>
                         </View>
 

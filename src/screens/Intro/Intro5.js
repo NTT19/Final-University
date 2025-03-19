@@ -30,21 +30,20 @@ export default function Intro5() {
 
                     <View style={{ flex: 1, justifyContent: 'space-around' }}>
 
-                        <Text style={[style.title]}>WiFi Paring</Text>
+                        <Text style={[style.title]}>Kết nối Wifi</Text>
 
                         <Image source={require('../../../assets/image/s5.png')} resizeMode='stretch' style={{ height: height / 4, width: width / 1.5, alignSelf: 'center' }} />
 
-                        <Text style={[style.title, { fontSize: 26, textAlign: 'center', }]}>Now connect to your
-                            device’s Wifi</Text>
+                        <Text style={[style.title, { fontSize: 26, textAlign: 'center', }]}>Bây giờ hãy kết nối với Wifi của thiết bị của bạn</Text>
 
-                        <Text style={[style.s14, { color: Colors.dis, textAlign: 'center' }]}>You can change the WiFi settings by tab on the button below or connect now</Text>
+                        <Text style={[style.s14, { color: Colors.dis, textAlign: 'center' }]}>Bạn có thể thay đổi cài đặt Wifi bằng cách nhấp vào nút bên dưới hoặc kết nối ngay bây giờ</Text>
 
                         <TouchableOpacity  style={[style.btno, { marginTop: 20 }]}>
-                            <Text style={[style.btntxt,{color:Colors.primary}]}>WiFi settings</Text>
+                            <Text style={[style.btntxt,{color:Colors.primary}]}>Cài đặt Wifi</Text>
                         </TouchableOpacity>
 
                         <TouchableOpacity onPress={() => navigation.navigate('Intro6')} style={[style.btn, { marginBottom: 20 }]}>
-                            <Text style={[style.btntxt]}>Connect</Text>
+                            <Text style={[style.btntxt]}>Kết nối</Text>
                         </TouchableOpacity>
 
                     </View>

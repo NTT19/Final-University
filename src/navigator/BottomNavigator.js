@@ -28,7 +28,7 @@ export default function MyTabs() {
         options={{
           tabBarShowLabel: true,
           tabBarLabel: ({ focused, color, }) => (
-            <Text style={[style.s15, { color: focused ? Colors.primary : Colors.icon, }]}>Garden</Text>
+            <Text style={[style.s15, { color: focused ? Colors.primary : Colors.icon, }]}>Vườn</Text>
           ),
           tabBarIcon: ({ focused, color }) => {
             return <Image source={focused ? require('../../assets/image/t1.png') : require('../../assets/image/t1.png')} style={{ height: 24, width: 24 }} />
@@ -54,7 +54,7 @@ export default function MyTabs() {
         options={{
           tabBarShowLabel: true,
           tabBarLabel: ({ focused, color, }) => (
-            <Text style={[style.s15, { color: focused ? Colors.primary : Colors.icon, }]}>Settings</Text>
+            <Text style={[style.s15, { color: focused ? Colors.primary : Colors.icon, }]}>Cài đặt</Text>
           ),
 
           tabBarIcon: ({ focused, color }) => {
@@ -67,7 +67,7 @@ export default function MyTabs() {
         options={{
           tabBarShowLabel: true,
           tabBarLabel: ({ focused, color, }) => (
-            <Text style={[style.s15, { color: focused ? Colors.primary : Colors.icon, }]}>Profile</Text>
+            <Text style={[style.s15, { color: focused ? Colors.primary : Colors.icon, }]}>Hồ sơ</Text>
           ),
 
           tabBarIcon: ({ focused, color }) => {

@@ -30,11 +30,11 @@ export default function NPass() {
 
                     <ScrollView showsVerticalScrollIndicator={false} style={{}}>
 
-                        <Text style={[style.title]}>New Password</Text>
-                        <Text style={[style.s14,{color:Colors.dis,marginTop:5}]}>Enter your new password</Text>              
+                        <Text style={[style.title]}>Mật khẩu mới</Text>
+                        <Text style={[style.s14,{color:Colors.dis,marginTop:5}]}>Nhập mật khẩu mới</Text>              
 
                         <View style={[style.txtinput, { marginTop: 40, }]}>
-                            <TextInput placeholder='Password' 
+                            <TextInput placeholder='Mật khẩu' 
                                 placeholderTextColor={Colors.icon}
                                 selectionColor={Colors.primary}
                                 secureTextEntry={!isPasswordVisible}
@@ -46,7 +46,7 @@ export default function NPass() {
                         </View>
 
                         <View style={[style.txtinput, { marginTop: 20, }]}>
-                            <TextInput placeholder='Confirm Password' 
+                            <TextInput placeholder='Nhập lại mật khẩu' 
                                 placeholderTextColor={Colors.icon}
                                 selectionColor={Colors.primary}
                                 secureTextEntry={!isPasswordVisible1}
@@ -60,7 +60,7 @@ export default function NPass() {
                         
                         <TouchableOpacity onPress={()=>navigation.navigate('Login')} 
                             style={[style.btn, { marginTop: 60 ,height:48,marginBottom:20}]}>
-                            <Text style={style.btntxt}>Confirm</Text>
+                            <Text style={style.btntxt}>Đồng ý</Text>
                         </TouchableOpacity>
 
                     </ScrollView>

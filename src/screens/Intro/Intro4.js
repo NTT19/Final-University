@@ -31,12 +31,10 @@ export default function Intro4() {
 
                     <ScrollView showsVerticalScrollIndicator={false} style={{ marginTop: 15 }}>
 
-                        <Text style={[style.title]}>WiFi Paring</Text>
-                        <Text style={[style.s14, { color: Colors.dis }]}>Please enter the details for your
-                            WiFi network</Text>
-
+                        <Text style={[style.title]}>Kết nối Wifi</Text>
+                        <Text style={[style.s14, { color: Colors.dis }]}>Vui lòng nhập thông tin chi tiết cho mạng Wifi của bạn</Text>
                         <View style={[style.txtinput, { marginTop: 20, }]}>
-                            <TextInput placeholder='Your WiFi network’s name'
+                            <TextInput placeholder='Tên Wifi'
                                 placeholderTextColor={Colors.icon}
                                 selectionColor={Colors.primary}
                                 style={[style.s16, { color: Colors.txt, flex: 1 }]}
@@ -44,7 +42,7 @@ export default function Intro4() {
                         </View>
 
                         <View style={[style.txtinput, { marginTop: 20, }]}>
-                            <TextInput placeholder='Password'
+                            <TextInput placeholder='Mật khẩu'
                                 placeholderTextColor={Colors.icon}
                                 selectionColor={Colors.primary}
                                 secureTextEntry={!isPasswordVisible}
@@ -56,7 +54,7 @@ export default function Intro4() {
                         </View>
 
                         <View style={[style.txtinput, { marginTop: 20, marginBottom: 15 }]}>
-                            <TextInput placeholder='Security type'
+                            <TextInput placeholder='Loại bảo bật'
                                 placeholderTextColor={Colors.icon}
                                 selectionColor={Colors.primary}
                                 style={[style.s16, { color: Colors.txt, flex: 1 }]}
@@ -67,7 +65,7 @@ export default function Intro4() {
                     </ScrollView>
 
                     <TouchableOpacity onPress={() => navigation.navigate('Intro5')} style={[style.btn, { marginBottom: 20 }]}>
-                        <Text style={[style.btntxt]}>Next</Text>
+                        <Text style={[style.btntxt]}>Tiếp tục</Text>
                     </TouchableOpacity>
 
                 </View>

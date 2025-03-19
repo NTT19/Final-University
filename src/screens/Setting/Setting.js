@@ -20,11 +20,11 @@ export default function Setting() {
 
                 <View style={[style.main, { marginTop: Platform.OS === 'ios' ? 10 : 10, }]}>
 
-                    <Text style={[style.apptitle, {}]}>Settings</Text>
+                    <Text style={[style.apptitle, {}]}>Cài đặt</Text>
 
                     <View style={[style.inputcontainer, { marginTop: 15, height: 42 }]}>
                         <Icon name='search' size={20} color={Colors.txt}></Icon>
-                        <TextInput placeholder='Search in Settings'
+                        <TextInput placeholder='Tìm kiếm'
                             placeholderTextColor={Colors.icon}
                             selectionColor={Colors.primary}
                             style={[style.m14, { color: Colors.txt, flex: 1, marginLeft: 5 }]}
@@ -33,7 +33,7 @@ export default function Setting() {
 
                     <ScrollView showsVerticalScrollIndicator={false} style={{ marginTop: 20 }}>
 
-                        <Text style={[style.subtitle]}>App Settings</Text>
+                        <Text style={[style.subtitle]}>Cài đặt ứng dụng</Text>
 
                         <TouchableOpacity /*onPress={() => navigation.navigate('Wifi')} */ style={[style.box,style.list,style.shadow,{backgroundColor:Colors.bg,margin:5 ,marginTop:15}]}>
                             <View style={[style.icon,{height:34,width:34,}]}>
@@ -41,8 +41,8 @@ export default function Setting() {
                             </View>
                             <View style={[style.verticaldivider,{marginHorizontal:15}]}></View>
                             <View style={{flex:1}}>
-                                <Text style={[style.b16]}>Wifi & App</Text>
-                                <Text style={[style.s12,{color:Colors.icon,marginTop:3}]}>Wifi & app settings</Text>
+                                <Text style={[style.b16]}>Wifi & Ứng dụng</Text>
+                                <Text style={[style.s12,{color:Colors.icon,marginTop:3}]}>Cài đặt Wifi và ứng dụng</Text>
                             </View>
                         </TouchableOpacity>
 
@@ -52,12 +52,12 @@ export default function Setting() {
                             </View>
                             <View style={[style.verticaldivider,{marginHorizontal:15}]}></View>
                             <View style={{flex:1}}>
-                                <Text style={[style.b16]}>Notifications</Text>
-                                <Text style={[style.s12,{color:Colors.icon,marginTop:3}]}>Notification & in-app messaging</Text>
+                                <Text style={[style.b16]}>Thông báo</Text>
+                                <Text style={[style.s12,{color:Colors.icon,marginTop:3}]}>Thông báo & nhắn tin trong ứng dụng</Text>
                             </View>
                         </TouchableOpacity>
 
-                        <Text style={[style.subtitle,{marginTop:20}]}>Account & Support</Text>
+                        <Text style={[style.subtitle,{marginTop:20}]}>Tài khoản & Hỗ trợ</Text>
 
                         <TouchableOpacity /* onPress={() => navigation.navigate('Account')} */ style={[style.box,style.list,style.shadow,{backgroundColor:Colors.bg,margin:5 ,marginTop:15}]}>
                             <View style={[style.icon,{height:34,width:34,}]}>
@@ -65,8 +65,8 @@ export default function Setting() {
                             </View>
                             <View style={[style.verticaldivider,{marginHorizontal:15}]}></View>
                             <View style={{flex:1}}>
-                                <Text style={[style.b16]}>Account</Text>
-                                <Text style={[style.s12,{color:Colors.icon,marginTop:3}]}>Account &  privacy settings</Text>
+                                <Text style={[style.b16]}>Tài khoản</Text>
+                                <Text style={[style.s12,{color:Colors.icon,marginTop:3}]}>Cài đặt tài khoản và quyền riêng tư</Text>
                             </View>
                         </TouchableOpacity>
 
@@ -76,8 +76,8 @@ export default function Setting() {
                             </View>
                             <View style={[style.verticaldivider,{marginHorizontal:15}]}></View>
                             <View style={{flex:1}}>
-                                <Text style={[style.b16]}>Contact Us</Text>
-                                <Text style={[style.s12,{color:Colors.icon,marginTop:3}]}>Ask anything about product</Text>
+                                <Text style={[style.b16]}>Liên hệ với chúng tôi</Text>
+                                <Text style={[style.s12,{color:Colors.icon,marginTop:3}]}>Hỏi bất cứ điều gì về sản phẩm</Text>
                             </View>
                         </TouchableOpacity>
 

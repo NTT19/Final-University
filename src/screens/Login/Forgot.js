@@ -28,22 +28,22 @@ export default function Forgot() {
 
                     <ScrollView showsVerticalScrollIndicator={false} style={{}}>
 
-                        <Text style={[style.title]}>Recovery</Text>
-                        <Text style={[style.s14,{color:Colors.dis,marginTop:5}]}>Enter email to receive recovery code</Text>
+                        <Text style={[style.title]}>Khôi phục tài khoản</Text>
+                        <Text style={[style.s14,{color:Colors.dis,marginTop:5}]}>Nhập số điện thoại để nhận mã khôi phục</Text>
 
                         <View style={[style.txtinput, { marginTop: 40, }]}>
-                            <TextInput placeholder='Email' 
+                            <TextInput placeholder='Số điện thoại' 
                                 placeholderTextColor={Colors.icon}
                                 selectionColor={Colors.primary}
                                 style={[style.s16, { color: Colors.txt, flex:1}]}
                             />
                         </View>
 
-                        <Text style={[style.s14,{marginTop:80,textAlign:'center'}]}>Make sure you already comfirmed your emaill. By pressing button below, you’ll get an email with recovery code. Input this code on the next page to reset your password</Text>
+                        <Text style={[style.s14,{marginTop:80,textAlign:'center'}]}>Hãy đảm bảo bạn đã xác nhận email của mình. Bằng cách nhấn nút bên dưới, bạn sẽ nhận được email có mã khôi phục. Nhập mã này vào trang tiếp theo để đặt lại mật khẩu của bạn</Text>
                         
                         <TouchableOpacity onPress={()=>navigation.navigate('Otp')} 
                             style={[style.btn, { marginTop: 30 ,height:48,marginBottom:20}]}>
-                            <Text style={style.btntxt}>Get the code</Text>
+                            <Text style={style.btntxt}>Nhận mã</Text>
                         </TouchableOpacity>
 
                     </ScrollView>
