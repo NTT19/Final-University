@@ -25,7 +25,7 @@ const height = Dimensions.get('screen').height
         setError(null);
 
         try {
-            const response = await loginApi.login(email, password);  
+            const response = await loginApi.login(phone, password);  
             const token = response.data.token; 
             navigation.replace('Home'); 
         } catch (err) {
