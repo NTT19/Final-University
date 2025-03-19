@@ -9,7 +9,7 @@
 
 - [ ] **Chatbot**
 
-- [ ] **Full tiếng Việt**
+- [X] **Full tiếng Việt**
 
 - [ ] **Format màu trùng với website**
 
