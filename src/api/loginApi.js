@@ -1,10 +1,10 @@
 import apiClient from "./apiClient";
 
-const login = (phone, password) => {
+const login = (phone_number, password) => {
     return apiClient.post('/login',
     {
-        phone,
-        password
+        phone_number,
+        password,
     });
 
 };

@@ -77,7 +77,7 @@ export default function Signup() {
                             <Text style={style.btntxt}>Tạo tài khoản mới</Text>
                         </TouchableOpacity>
 
-                        <View style={[style.list,{justifyContent:'center',marginVertical:20}]}>
+                        {/* <View style={[style.list,{justifyContent:'center',marginVertical:20}]}>
                             <View style={[style.divider,{backgroundColor:Colors.dis,width:30}]}></View>
                             <Text style={[style.s14,{color:Colors.dis,marginHorizontal:10}]}>Lựa chọn khác</Text>
                             <View style={[style.divider,{backgroundColor:Colors.dis,width:30}]}></View>
@@ -89,7 +89,7 @@ export default function Signup() {
                             </View>
                             <Image source={require('../../../assets/image/a2.png')} resizeMode='stretch' style={{height:36,width:36,marginHorizontal:25}}></Image>
                             <Image source={require('../../../assets/image/a3.png')} resizeMode='stretch' style={{height:36,width:36}}></Image>
-                        </View>
+                        </View> */}
 
                     </ScrollView>
                 </View>

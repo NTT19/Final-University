@@ -73,29 +73,29 @@ export default function PotInfo() {
                                     <Text style={[style.s14, { marginLeft: 7 }]}>Enjoy for: 90 - 112 days</Text>
                                 </View>
                             </View>
-                            <Image source={require('../../../assets/image/s19.png')} resizeMode='stretch' style={{ height: 180, width: 90 }} />
+                            <Image source={require('../../../assets/image/jackfruit_tree.png')} resizeMode='stretch' style={{ height: 180, width: 90 }} />
                         </View>
 
                         <View style={[style.list, { marginTop: 20, justifyContent: 'space-around' }]}>
                             <TouchableOpacity onPress={() => setVisible2(true)} style={{ alignItems: 'center' }}>
-                                <Text style={[style.b14]}>Water</Text>
+                                <Text style={[style.b14]}>Nước</Text>
                                 <Image source={require('../../../assets/image/s11.png')} resizeMode='stretch' style={{ height: 68, width: 68, marginTop: 15 }} />
                                 <Text style={[style.b16, { marginTop: 15 }]}>2 DAYS</Text>
                                 <Text style={[style.b12, { color: Colors.icon, marginTop: 10 }]}>Every 7 Days</Text>
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => setVisible4(true)} style={{ alignItems: 'center' }}>
-                                <Text style={[style.b14]}>Light</Text>
+                                <Text style={[style.b14]}>Ánh Sáng</Text>
                                 <Image source={require('../../../assets/image/s12.png')} resizeMode='stretch' style={{ height: 68, width: 68, marginTop: 15 }} />
                                 <Text style={[style.b16, { marginTop: 15 }]}>65%</Text>
                                 <Text style={[style.b12, { color: Colors.icon, marginTop: 10 }]}>18HRS a day</Text>
                             </TouchableOpacity>
                         </View>
 
-                        <Text style={[style.b14, { textAlign: 'center', marginTop: 20 }]}>Days planted</Text>
+                        {/* <Text style={[style.b14, { textAlign: 'center', marginTop: 20 }]}>Days planted</Text>
                         <View style={{ height: 10, backgroundColor: Colors.lines1, borderRadius: 5, width: width / 1.5, alignSelf: 'center', marginTop: 15 }}>
                             <View style={{ height: 10, backgroundColor: Colors.primary, borderRadius: 5, width: width / 7 }}></View>
                         </View>
-                        <Text style={[style.b17, { color: Colors.primary, marginTop: 5, marginLeft: 50, marginBottom: 20 }]}>15 Days</Text>
+                        <Text style={[style.b17, { color: Colors.primary, marginTop: 5, marginLeft: 50, marginBottom: 20 }]}>15 Days</Text> */}
 
                     </ScrollView>
 

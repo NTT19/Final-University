@@ -22,9 +22,9 @@ export default function Home() {
                         elevation={0}
                         color={Colors.bg}
                         leading={<Text style={[style.s42]}>Khu vườn của tôi</Text>}
-                        trailing={<TouchableOpacity onPress={()=>navigation.navigate('AddPot')}>
-                            <Icon name='add-circle-outline' size={24} color={Colors.primary} />
-                        </TouchableOpacity>}
+                        // trailing={<TouchableOpacity onPress={()=>navigation.navigate('AddPot')}>
+                        //     <Icon name='add-circle-outline' size={24} color={Colors.primary} />
+                        // </TouchableOpacity>}
                     />
 
                     <View style={[style.list, { marginTop: 10 }]}>
@@ -43,15 +43,15 @@ export default function Home() {
                                 <View>
                                     <ScrollView horizontal showsHorizontalScrollIndicator={false} >
 
-                                        <TouchableOpacity onPress={() => navigation.navigate('PotInfo')}>
+                                        {/* <TouchableOpacity onPress={() => navigation.navigate('PotInfo')}>
                                             <Image source={require('../../../assets/image/s8.png')} resizeMode='stretch' style={{ height: height / 3.5, width: width / 2, }} />
-                                        </TouchableOpacity>
+                                        </TouchableOpacity> */}
                                         <TouchableOpacity onPress={() => navigation.navigate('PotInfo')}>
-                                            <Image source={require('../../../assets/image/jackfruit_tree.png')} resizeMode='stretch' style={{ height: height / 3.5, width: width / 2, marginLeft: 10 }} />
+                                            <Image source={require('../../../assets/image/jackfruit_tree.png')} resizeMode='stretch' style={{ height: height / 3.5, width: width / 2, marginLeft: 60 }} />
                                         </TouchableOpacity>
-                                        <TouchableOpacity onPress={() => navigation.navigate('PotInfo')}>
+                                        {/* <TouchableOpacity onPress={() => navigation.navigate('PotInfo')}>
                                             <Image source={require('../../../assets/image/s10.png')} resizeMode='stretch' style={{ height: height / 3.5, width: width / 2, marginLeft: 10 }} />
-                                        </TouchableOpacity>
+                                        </TouchableOpacity> */}
 
                                     </ScrollView>
 

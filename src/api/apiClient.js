@@ -1,7 +1,8 @@
 import axios from "axios";
+import { variables } from "./variables";
 
 const apiClient = axios.create({
-    baseURL: "https://67c387671851890165af4169.mockapi.io/api",
+    baseURL: variables.LOGIN_URL,
     headers:{
         "Content-type": "application/json",
     },

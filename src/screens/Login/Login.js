@@ -1,4 +1,4 @@
-import { View, Dimensions, Text, SafeAreaView, TextInput, StatusBar, TouchableOpacity, Image, ScrollView, KeyboardAvoidingView, ImageBackground } from 'react-native'
+import { View, Dimensions, Text, SafeAreaView, TextInput, StatusBar, TouchableOpacity, Image, ScrollView, KeyboardAvoidingView, ImageBackground, ActivityIndicator } from 'react-native'
 import React, { useState, useContext } from 'react'
 import style from '../../theme/style';
 import { Colors } from '../../theme/color';
@@ -26,7 +26,7 @@ const height = Dimensions.get('screen').height
 
         try {
             const response = await loginApi.login(phone, password);  
-            const token = response.data.token; 
+           // const token = response.data.token; 
             navigation.replace('Home'); 
         } catch (err) {
             setError('Login failed. Please check your credentials.');
@@ -106,7 +106,7 @@ const height = Dimensions.get('screen').height
                         {error && <Text style={{ color: 'red', marginTop: 10, marginLeft: 50 }}>{error}</Text>}
 
 
-                        <View style={[style.list, { justifyContent: 'center', marginVertical: 20 }]}>
+                        {/* <View style={[style.list, { justifyContent: 'center', marginVertical: 20 }]}>
                             <View style={[style.divider, { backgroundColor: Colors.dis, width: 30 }]}></View>
                             <Text style={[style.s14, { color: Colors.dis, marginHorizontal: 10 }]}>Lựa chọn khác</Text>
                             <View style={[style.divider, { backgroundColor: Colors.dis, width: 30 }]}></View>
@@ -118,7 +118,7 @@ const height = Dimensions.get('screen').height
                             </View>
                             <Image source={require('../../../assets/image/a2.png')} resizeMode='stretch' style={{ height: 36, width: 36, marginHorizontal: 25 }}></Image>
                             <Image source={require('../../../assets/image/a3.png')} resizeMode='stretch' style={{ height: 36, width: 36 }}></Image>
-                        </View>
+                        </View> */}
 
                     </ScrollView>
                 </View>
