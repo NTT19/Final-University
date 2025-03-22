@@ -29,11 +29,10 @@ const height = Dimensions.get('screen').height
            // const token = response.data.token; 
             navigation.replace('Home'); 
         } catch (err) {
-            setError('Login failed. Please check your credentials.');
+            setError('Đăng nhập thất bãi. Hãy kiểm tra lại mật khẩu!!!!.'); 
         } finally {
             setLoading(false);
         }
-
 };
 
     return (
@@ -103,7 +102,7 @@ const height = Dimensions.get('screen').height
                             <Text style={style.btntxt}>Đăng nhập</Text>)}
                         </TouchableOpacity>
                          {/* Error message */}
-                        {error && <Text style={{ color: 'red', marginTop: 10, marginLeft: 50 }}>{error}</Text>}
+                        {error && <Text style={{ color: 'red', marginTop: 10, marginLeft: 30 }}>{error}</Text>}
 
 
                         {/* <View style={[style.list, { justifyContent: 'center', marginVertical: 20 }]}>

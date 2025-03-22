@@ -21,7 +21,7 @@ export default function Home() {
                     <AppBar
                         elevation={0}
                         color={Colors.bg}
-                        leading={<Text style={[style.s42]}>Khu vườn của tôi</Text>}
+                        leading={<Text style={[style.s42]}>Khu vườn</Text>}
                         // trailing={<TouchableOpacity onPress={()=>navigation.navigate('AddPot')}>
                         //     <Icon name='add-circle-outline' size={24} color={Colors.primary} />
                         // </TouchableOpacity>}

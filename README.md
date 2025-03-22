@@ -11,6 +11,10 @@
 
 - [X] **Full tiếng Việt**
 
-- [ ] **Format màu trùng với website**
+- [X] **Format màu trùng với website**
 
 - [ ] **API thời tiết**
+
+ngày 21/03/2025
+- dashboard -> vườn -> cài đặt  -> hồ sơ
+- 
