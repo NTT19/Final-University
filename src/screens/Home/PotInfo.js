@@ -80,14 +80,14 @@ export default function PotInfo() {
                             <TouchableOpacity onPress={() => setVisible2(true)} style={{ alignItems: 'center' }}>
                                 <Text style={[style.b14]}>Nước</Text>
                                 <Image source={require('../../../assets/image/s11.png')} resizeMode='stretch' style={{ height: 68, width: 68, marginTop: 15 }} />
-                                <Text style={[style.b16, { marginTop: 15 }]}>2 DAYS</Text>
-                                <Text style={[style.b12, { color: Colors.icon, marginTop: 10 }]}>Every 7 Days</Text>
+                                {/* <Text style={[style.b16, { marginTop: 15 }]}>2 DAYS</Text>
+                                <Text style={[style.b12, { color: Colors.icon, marginTop: 10 }]}>Every 7 Days</Text> */}
                             </TouchableOpacity>
                             <TouchableOpacity onPress={() => setVisible4(true)} style={{ alignItems: 'center' }}>
                                 <Text style={[style.b14]}>Ánh Sáng</Text>
                                 <Image source={require('../../../assets/image/s12.png')} resizeMode='stretch' style={{ height: 68, width: 68, marginTop: 15 }} />
-                                <Text style={[style.b16, { marginTop: 15 }]}>65%</Text>
-                                <Text style={[style.b12, { color: Colors.icon, marginTop: 10 }]}>18HRS a day</Text>
+                                {/* <Text style={[style.b16, { marginTop: 15 }]}>65%</Text>
+                                <Text style={[style.b12, { color: Colors.icon, marginTop: 10 }]}>18HRS a day</Text> */}
                             </TouchableOpacity>
                         </View>
 

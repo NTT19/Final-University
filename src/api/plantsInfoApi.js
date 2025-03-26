@@ -1,9 +1,9 @@
-import apiClient from "./apiClient";
+import plantsInfoClient from "./plantsInfoClient";
 
 // Hàm lấy thông tin cây trồng từ API
 const getPlants = () => {
-    return apiClient.get('/plants');  
+    return plantsInfoClient.get('/plants');  
 };
-console.log(getPlants);
+
 
 export default { getPlants };

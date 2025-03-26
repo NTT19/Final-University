@@ -1,7 +1,7 @@
 import axios from "axios";
 import { variables } from "./variables";
 
-const apiClient = axios.create({
+const plantsInfoClient = axios.create({
     baseURL: variables.PLANTSINFOR_URL,  
     headers: {
         "Content-type": "application/json",
