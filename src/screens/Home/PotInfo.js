@@ -61,7 +61,7 @@ export default function PotInfo() {
     try {
         await axios.put(`https://plantify.info.vn/api/modeSetting/updateMode?mode=${newMode}`);
         setMode(newMode); // Cập nhật chế độ trong state
-        showToast('success', `Chế độ thành ${newMode === 0 ? 'Thủ công' : newMode === 1 ? 'Tự động theo cảm biến' : 'Đặt lịch tưới'}`);
+        showToast('success', `Chế độ thành ${newMode === 0 ? 'Thủ công' : newMode === 1 ? 'Tự động' : 'Đặt lịch tưới'}`);
     } catch (error) {
         showToast('error', 'Không thể cập nhật chế độ');
         console.error(error);
