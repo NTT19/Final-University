@@ -4,4 +4,5 @@ export const variables = {
     SENSOR_READING: "http://plantify.info.vn/api",
     MANUAL_CONTROL: "https://plantify.info.vn/api/ledStatus",
     STATUS_CONTROL: "http://plantify.info.vn/api",
+    MODE_SETTING:"https://plantify.info.vn/api"
 }

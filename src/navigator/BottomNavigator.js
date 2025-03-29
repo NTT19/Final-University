@@ -27,15 +27,43 @@ export default function MyTabs() {
       <Tab.Screen name="Home" component={Home}
         options={{
           tabBarShowLabel: true,
-          tabBarLabel: ({ focused, color, }) => (
-            <Text style={[style.s15, { color: focused ? Colors.primary : Colors.icon, }]}>Vườn</Text>
+          tabBarLabel: ({ focused, color }) => (
+            <Text style={[style.s15, { color: focused ? Colors.primary : Colors.icon }]}>Vườn</Text>
           ),
-          tabBarIcon: ({ focused, color }) => {
-            return <Image source={focused ? require('../../assets/image/t1.png') : require('../../assets/image/t1.png')} style={{ height: 24, width: 24 }} />
-          },
+          tabBarIcon: ({ focused, color }) => (
+            <Ionicons name="leaf" size={24} color={focused ? Colors.primary : Colors.icon} />
+          ),
           headerShown: false,
         }}
       />
+
+
+      <Tab.Screen name="Dashboard" component={Home}
+          options={{
+            tabBarShowLabel: true,
+            tabBarLabel: ({ focused, color }) => (
+              <Text style={[style.s15, { color: focused ? Colors.primary : Colors.icon }]}>Biểu đồ</Text>
+            ),
+            tabBarIcon: ({ focused, color }) => (
+              <Ionicons name="stats-chart" size={24} color={focused ? Colors.primary : Colors.icon} />
+            ),
+            headerShown: false,
+          }}
+        />
+      
+      <Tab.Screen name="Camera" component={Home}
+                options={{
+                  tabBarShowLabel: true,
+                  tabBarLabel: ({ focused, color }) => (
+                    <Text style={[style.s15, { color: focused ? Colors.primary : Colors.icon }]}>Camera</Text>
+                  ),
+                  tabBarIcon: ({ focused, color }) => (
+                    <Ionicons name="camera" size={24} color={focused ? Colors.primary : Colors.icon} />
+                  ),
+                  headerShown: false,
+                }}
+              />
+      
 
       {/* <Tab.Screen name="Store" component={Store}
         options={{
@@ -50,31 +78,31 @@ export default function MyTabs() {
           headerShown: false,
         }} /> */}
 
-      <Tab.Screen name="Setting" component={Setting}
-        options={{
-          tabBarShowLabel: true,
-          tabBarLabel: ({ focused, color, }) => (
-            <Text style={[style.s15, { color: focused ? Colors.primary : Colors.icon, }]}>Cài đặt</Text>
-          ),
+<Tab.Screen name="Setting" component={Setting}
+  options={{
+    tabBarShowLabel: true,
+    tabBarLabel: ({ focused, color }) => (
+      <Text style={[style.s15, { color: focused ? Colors.primary : Colors.icon }]}>Cài đặt</Text>
+    ),
+    tabBarIcon: ({ focused, color }) => (
+      <Ionicons name="settings" size={24} color={focused ? Colors.primary : Colors.icon} />
+    ),
+    headerShown: false,
+  }}
+/>
 
-          tabBarIcon: ({ focused, color }) => {
-            return <Image source={focused ? require('../../assets/image/t3.png') : require('../../assets/image/t3.png')} style={{ height: 24, width: 24 }} />
-          },
-          headerShown: false,
-        }} />
-
-      <Tab.Screen name="Profile" component={Profile}
-        options={{
-          tabBarShowLabel: true,
-          tabBarLabel: ({ focused, color, }) => (
-            <Text style={[style.s15, { color: focused ? Colors.primary : Colors.icon, }]}>Hồ sơ</Text>
-          ),
-
-          tabBarIcon: ({ focused, color }) => {
-            return <Image source={focused ? require('../../assets/image/t4.png') : require('../../assets/image/t4.png')} style={{ height: 24, width: 24 }} />
-          },
-          headerShown: false,
-        }} />
+<Tab.Screen name="Profile" component={Profile}
+  options={{
+    tabBarShowLabel: true,
+    tabBarLabel: ({ focused, color }) => (
+      <Text style={[style.s15, { color: focused ? Colors.primary : Colors.icon }]}>Hồ sơ</Text>
+    ),
+    tabBarIcon: ({ focused, color }) => (
+      <Ionicons name="person" size={24} color={focused ? Colors.primary : Colors.icon} />
+    ),
+    headerShown: false,
+  }}
+/>
 
 
     </Tab.Navigator>
