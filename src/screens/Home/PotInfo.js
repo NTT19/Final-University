@@ -1,10 +1,12 @@
-import { View, Dimensions, Text, SafeAreaView, Modal, Switch, TextInput, StatusBar, TouchableOpacity, Image, ScrollView, KeyboardAvoidingView, ImageBackground } from 'react-native'
-import React, { useState, useContext } from 'react'
+import { View, Dimensions, Text, SafeAreaView, Modal, Switch, TextInput, StatusBar, TouchableOpacity, Image, ScrollView, KeyboardAvoidingView, ImageBackground, Alert } from 'react-native'
+import React, { useState, useContext, useEffect } from 'react'
 import style from '../../theme/style';
 import { Colors } from '../../theme/color';
 import { useNavigation } from '@react-navigation/native';
 import { AppBar, HStack } from '@react-native-material/core';
 import Icon from 'react-native-vector-icons/Ionicons';
+import manualControlApi from '../../api/manualControlApi';
+import Toast from 'react-native-toast-message';
 
 const width = Dimensions.get('screen').width
 const height = Dimensions.get('screen').height
@@ -23,6 +25,101 @@ export default function PotInfo() {
 
     const [isEnabled1, setIsEnabled1] = useState(false);
     const toggleSwitch1 = () => setIsEnabled1(previousState => !previousState);
+
+
+ // States for new buttons
+ const [isExpanded, setIsExpanded] = useState(false); // Trạng thái mở rộng/thu gọn
+ const [isMistingEnabled, setIsMistingEnabled] = useState(false);
+ const [isWateringEnabled, setIsWateringEnabled] = useState(false);
+ const [isLightEnabled, setIsLightEnabled] = useState(false);
+ const [isCameraEnabled, setIsCameraEnabled] = useState(false);
+
+
+  // Hàm hiển thị thông báo
+  const showToast = (type, message) => {
+    Toast.show({
+        position: 'top',
+        topOffset: 80,
+        type: type,
+        text1: message,
+        visibilityTime: 1000, 
+        text1Style: { fontSize: 20, fontWeight: 'bold', color: 'black' } ,
+    });
+};
+
+ // Hàm lấy trạng thái điều khiển từ API
+//  const fetchControlStatus = async () => {
+//     try {
+//         const data = await statusControlApi.getDeviceStatus();
+//         const { led1, led2, led3, led4 } = data;
+
+//         // Cập nhật trạng thái điều khiển
+//         setIsLightEnabled(led1 === "0");
+//         setIsWateringEnabled(led2 === "0");
+//         setIsMistingEnabled(led3 === "0");
+//         setIsCameraEnabled(led4 === "0");
+//     } catch (error) {
+//         console.error("Lỗi khi lấy trạng thái điều khiển:", error);
+//     }
+// };
+
+ // Gọi API khi component được render và định kỳ
+//  useEffect(() => {
+//     fetchControlStatus();
+//     const interval = setInterval(fetchControlStatus, 10000);
+//         return () => clearInterval(interval); // Dọn dẹp interval khi component bị unmount
+//     }, []);
+
+ // Hàm bật/tắt với API
+ const toggleMisting = async () => {
+    try {
+        const newState = !isMistingEnabled;
+        setIsMistingEnabled(newState);
+        await manualControlApi.updateDeviceStatus("led3", newState ? "1" : "0");
+        showToast('success', `Phun sương đã được ${newState ? "bật" : "tắt"}`);
+    } catch (error) {
+        showToast('error', "Không thể cập nhật trạng thái phun sương");
+        console.error(error);
+    }
+};
+
+const toggleWatering = async () => {
+    try {
+        const newState = !isWateringEnabled;
+        setIsWateringEnabled(newState);
+        await manualControlApi.updateDeviceStatus("led2", newState ? "1" : "0");
+        showToast('success', `Tưới nước đã được ${newState ? "bật" : "tắt"}`);
+    } catch (error) {
+        showToast('error', "Không thể cập nhật trạng thái tưới nước");
+        console.error(error);
+    }
+};
+
+const toggleLight = async () => {
+    try {
+        const newState = !isLightEnabled;
+        setIsLightEnabled(newState);
+        await manualControlApi.updateDeviceStatus("led1", newState ? "1" : "0");
+        showToast('success', `Đèn đã được ${newState ? "bật" : "tắt"}`);
+    } catch (error) {
+        showToast('error', "Không thể cập nhật trạng thái đèn");
+        console.error(error);
+    }
+};
+
+const toggleCamera = async () => {
+    try {
+        const newState = !isCameraEnabled;
+        setIsCameraEnabled(newState);
+        await manualControlApi.updateDeviceStatus("led4", newState ? "1" : "0");
+        showToast('success', `Camera đã được ${newState ? "bật" : "tắt"}`);
+    } catch (error) {
+        showToast('error', "Không thể cập nhật trạng thái camera");
+        console.error(error);
+    }
+};
+
+
 
     return (
         <SafeAreaView style={[style.area, {}]}>
@@ -96,7 +193,59 @@ export default function PotInfo() {
                             <View style={{ height: 10, backgroundColor: Colors.primary, borderRadius: 5, width: width / 7 }}></View>
                         </View>
                         <Text style={[style.b17, { color: Colors.primary, marginTop: 5, marginLeft: 50, marginBottom: 20 }]}>15 Days</Text> */}
+   
 
+                                {/* Khung "Điều khiển tự động" */}
+                                <View style={[style.box1, style.shadow, { margin: 10, padding: 15, borderRadius: 10 }]}>
+                            <TouchableOpacity onPress={() => setIsExpanded(!isExpanded)}>
+                                <Text style={[style.s16, { fontWeight: 'bold', color: Colors.txt }]}>Điều khiển thủ công</Text>
+                            </TouchableOpacity>
+
+                            {isExpanded && (
+                                <View style={[style.list, { justifyContent: 'space-around', marginTop: 15 }]}>
+                                    <View style={{ alignItems: 'center' }}>
+                                        <Text style={[style.b14]}>Đèn</Text>
+                                        <Switch
+                                            trackColor={{ false: Colors.disable, true: Colors.primary }}
+                                            thumbColor={isLightEnabled ? Colors.secondary : '#f4f3f4'}
+                                            ios_backgroundColor="#3e3e3e"
+                                            onValueChange={toggleLight}
+                                            value={isLightEnabled}
+                                        />
+                                    </View>
+                                    <View style={{ alignItems: 'center' }}>
+                                        <Text style={[style.b14]}>Tưới Nước</Text>
+                                        <Switch
+                                            trackColor={{ false: Colors.disable, true: Colors.primary }}
+                                            thumbColor={isWateringEnabled ? Colors.secondary : '#f4f3f4'}
+                                            ios_backgroundColor="#3e3e3e"
+                                            onValueChange={toggleWatering}
+                                            value={isWateringEnabled}
+                                        />
+                                    </View>
+                                    <View style={{ alignItems: 'center' }}>
+                                        <Text style={[style.b14]}>Phun Sương</Text>
+                                        <Switch
+                                            trackColor={{ false: Colors.disable, true: Colors.primary }}
+                                            thumbColor={isMistingEnabled ? Colors.secondary : '#f4f3f4'}
+                                            ios_backgroundColor="#3e3e3e"
+                                            onValueChange={toggleMisting}
+                                            value={isMistingEnabled}
+                                        />
+                                    </View>
+                                    <View style={{ alignItems: 'center' }}>
+                                        <Text style={[style.b14]}>Camera</Text>
+                                        <Switch
+                                            trackColor={{ false: Colors.disable, true: Colors.primary }}
+                                            thumbColor={isCameraEnabled ? Colors.secondary : '#f4f3f4'}
+                                            ios_backgroundColor="#3e3e3e"
+                                            onValueChange={toggleCamera}
+                                            value={isCameraEnabled}
+                                        />
+                                    </View>
+                                </View>
+                            )}
+                        </View>
                     </ScrollView>
 
                     <Modal transparent={true}
@@ -470,6 +619,9 @@ export default function PotInfo() {
 
                 </View>
             </KeyboardAvoidingView>
+
+              {/* Toast Component */}
+              <Toast />
         </SafeAreaView>
     )
 }
