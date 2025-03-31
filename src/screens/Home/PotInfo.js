@@ -258,8 +258,6 @@ const fetchControlStatus = async () => {
                         </TouchableOpacity>
                     </View>
 
-
-
                 {/* Khung "Điều khiển thủ công" */}
                 <View style={[style.box1, style.shadow, { margin: 10, padding: 15, borderRadius: 10 }]}>
                         <TouchableOpacity onPress={() => { setIsExpanded(!isExpanded); updateMode(0); }}>
@@ -450,9 +448,9 @@ const fetchControlStatus = async () => {
                                         
                                                 {/* Pump Cycle */}
                                                 <Text style={[style.b16, { marginTop: 15 }]}>Pump Cycle</Text>
-                                                <View style={[style.list, { marginTop: 15 }]}>
+                                                <View style={[style.list, { marginTop: 15, marginBottom: 20 }]}>
                                                     <Text style={[style.s16, { flex: 1 }]}>On (min)</Text>
-                                                    <View style={[style.list, { flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', marginLeft: 10 }]}>
+                                                    <View style={[style.list, { flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', marginLeft: 30 }]}>
                                                         <TouchableOpacity onPress={() => setPumpCycleOn(Math.max(1, pumpCycleOn - 1))}>
                                                             <Icon name="remove" size={24} color={Colors.icon} />
                                                         </TouchableOpacity>
@@ -464,9 +462,9 @@ const fetchControlStatus = async () => {
                                                         </TouchableOpacity>
                                                     </View>
                                                 </View>
-                                                <View style={[style.list, { marginTop: 15 }]}>
+                                                <View style={[style.list, { marginTop: 15, marginBottom: 20 }]}>
                                                     <Text style={[style.s16, { flex: 1 }]}>Rest (hr)</Text>
-                                                    <View style={[style.list, { flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', marginLeft: 10 }]}>
+                                                    <View style={[style.list, { flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', marginLeft: 30 }]}>
                                                         <TouchableOpacity onPress={() => setPumpCycleRest(Math.max(1, pumpCycleRest - 1))}>
                                                             <Icon name="remove" size={24} color={Colors.icon} />
                                                         </TouchableOpacity>
@@ -487,7 +485,7 @@ const fetchControlStatus = async () => {
                                                 updateMode(tempMode); // Cập nhật chế độ khi nhấn Save
                                                 setVisible2(false); // Đóng Modal
                                             }}
-                                            style={[style.btn, { marginTop: 20 }]}
+                                            style={[style.btn, { marginTop: 30 }]}
                                         >
                                             <Text style={[style.btntxt, {}]}>Save</Text>
                                         </TouchableOpacity>

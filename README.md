@@ -45,3 +45,7 @@ ngày 21/03/2025
 	+ status: 0 = off, 1 = on
 
 - [ ] API đặt lịch tưới: http://plantify.info.vn/api/ledControl GET
+
+-- mới 
+
+- [] thay cài đặt thành thông báo

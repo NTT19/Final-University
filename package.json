@@ -29,7 +29,9 @@
     "react-native-elements": "^3.4.3",
     "react-native-event-listeners": "^1.0.7",
     "react-native-gesture-handler": "^2.21.2",
+    "react-native-gifted-charts": "^1.4.58",
     "react-native-indicators": "^0.17.0",
+    "react-native-linear-gradient": "^2.8.3",
     "react-native-modal-datetime-picker": "^18.0.0",
     "react-native-otp-inputs": "^7.4.0",
     "react-native-pager-view": "^6.6.1",
@@ -39,6 +41,7 @@
     "react-native-reanimated": "^3.16.6",
     "react-native-safe-area-context": "^5.0.0",
     "react-native-screens": "^4.4.0",
+    "react-native-svg": "^15.11.2",
     "react-native-tab-view": "^4.0.5",
     "react-native-toast-message": "^2.2.1",
     "react-native-vector-icons": "^10.2.0"
