@@ -9,6 +9,7 @@ import manualControlApi from '../../api/manualControlApi';
 import Toast from 'react-native-toast-message';
 import axios from 'axios';
 import Slider from '@react-native-community/slider';
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 const width = Dimensions.get('screen').width
 const height = Dimensions.get('screen').height
@@ -18,9 +19,7 @@ export default function PotInfo() {
     const [visible, setVisible] = useState(false)
     const [visible1, setVisible1] = useState(false)
     const [visible2, setVisible2] = useState(false)
-    const [visible3, setVisible3] = useState(false)
-    const [visible4, setVisible4] = useState(false)
-    const [visible5, setVisible5] = useState(false)
+   
 
     const [isEnabled, setIsEnabled] = useState(false);
     const toggleSwitch = () => setIsEnabled(previousState => !previousState);
@@ -40,12 +39,79 @@ export default function PotInfo() {
 
  const [mode, setMode] = useState(null); // Lưu chế độ hiện tại
  const [isDefaultSetting, setIsDefaultSetting] = useState(false); // Trạng thái Default Setting
- const [pumpTimer, setPumpTimer] = useState(8); // Thời gian tưới (giờ/ngày)
- const [pumpCycleOn, setPumpCycleOn] = useState(1); // Thời gian bật (phút)
- const [pumpCycleRest, setPumpCycleRest] = useState(1); // Thời gian nghỉ (giờ)
- const [startTime, setStartTime] = useState('7:00 AM'); // Thời gian bắt đầu
  const [tempMode, setTempMode] = useState(mode); // Lưu chế độ tạm thời
 
+
+    const [schedule, setSchedule] = useState([]);
+    const [isStartTimePickerVisible, setStartTimePickerVisible] = useState(false);
+    const [isEndTimePickerVisible, setEndTimePickerVisible] = useState(false);
+
+    const [startTime, setStartTime] = useState('7:00 AM'); // Thời gian bắt đầu
+    const [endTime, setEndTime] = useState('7:00 PM'); // Thời gian kết thúc
+
+    const fetchSchedule = async () => {
+        try {
+            const response = await axios.get('https://plantify.info.vn/api/ledControl');
+            setSchedule(response.data);
+        } catch (error) {
+            showToast('error', 'Lỗi khi lấy lịch tưới');
+            console.error(error);
+        }
+    };
+
+    useEffect(() => {
+        fetchSchedule();  // Fetch schedule data when the component mounts
+    }, []);
+
+    const showStartTimePicker = () => setStartTimePickerVisible(true);
+    const hideStartTimePicker = () => setStartTimePickerVisible(false);
+
+    // Show End Time Picker
+    const showEndTimePicker = () => setEndTimePickerVisible(true);
+    const hideEndTimePicker = () => setEndTimePickerVisible(false);
+
+    // Handle start time selection
+    const handleStartTimeConfirm = (date) => {
+        const formattedTime = formatTime(date);
+        setStartTime(formattedTime);
+        hideStartTimePicker();
+    };
+
+    // Handle end time selection
+    const handleEndTimeConfirm = (date) => {
+        const formattedTime = formatTime(date);
+        setEndTime(formattedTime);
+        hideEndTimePicker();
+    };
+
+    const formatTime = (date) => {
+        const hours = date.getHours();
+        const minutes = date.getMinutes();
+        const period = hours >= 12 ? 'PM' : 'AM';
+        const formattedHours = hours % 12 || 12; // Convert 24-hour time to 12-hour format
+        const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+        return `${formattedHours}:${formattedMinutes} ${period}`;
+    };
+
+    const saveSchedule = async () => {
+        try {
+            const updatedSchedule = schedule.map(device => {
+                if (device.ledName === 'led1') {
+                    device.turnOnTime = startTime.split(':')[0];
+                    device.turnOffTime = endTime.split(':')[0];
+                }
+                return device;
+            });
+            await axios.put('https://plantify.info.vn/api/ledControl', updatedSchedule);
+            showToast('success', 'Cập nhật lịch thành công');
+            setVisible2(false);
+        } catch (error) {
+            showToast('error', 'Lỗi khi cập nhật lịch');
+            console.error(error);
+        }
+    };
+
+   
  const fetchMode = async () => {
     try {
         const response = await axios.get('https://plantify.info.vn/api/modeSetting');
@@ -259,56 +325,75 @@ const fetchControlStatus = async () => {
                     </View>
 
                 {/* Khung "Điều khiển thủ công" */}
-                <View style={[style.box1, style.shadow, { margin: 10, padding: 15, borderRadius: 10 }]}>
-                        <TouchableOpacity onPress={() => { setIsExpanded(!isExpanded); updateMode(0); }}>
-                            <Text style={[style.s16, { fontWeight: 'bold', color: Colors.txt, textAlign: 'center' }]}>Điều khiển thủ công</Text>
-                        </TouchableOpacity>
-                        {isExpanded && (
-                            <View style={[style.list, { justifyContent: 'space-around', marginTop: 15 }]}>
-                                {/* Các công tắc điều khiển */}
-                                <View style={{ alignItems: 'center' }}>
-                                    <Text style={[style.b14]}>Đèn</Text>
-                                    <Switch
-                                        trackColor={{ false: Colors.disable, true: Colors.primary }}
-                                        thumbColor={isLightEnabled ? Colors.secondary : '#f4f3f4'}
-                                        ios_backgroundColor="#3e3e3e"
-                                        onValueChange={toggleLight}
-                                        value={isLightEnabled}
-                                    />
-                                </View>
-                                <View style={{ alignItems: 'center' }}>
-                                    <Text style={[style.b14]}>Tưới Nước</Text>
-                                    <Switch
-                                        trackColor={{ false: Colors.disable, true: Colors.primary }}
-                                        thumbColor={isWateringEnabled ? Colors.secondary : '#f4f3f4'}
-                                        ios_backgroundColor="#3e3e3e"
-                                        onValueChange={toggleWatering}
-                                        value={isWateringEnabled}
-                                    />
-                                </View>
-                                <View style={{ alignItems: 'center' }}>
-                                    <Text style={[style.b14]}>Phun Sương</Text>
-                                    <Switch
-                                        trackColor={{ false: Colors.disable, true: Colors.primary }}
-                                        thumbColor={isMistingEnabled ? Colors.secondary : '#f4f3f4'}
-                                        ios_backgroundColor="#3e3e3e"
-                                        onValueChange={toggleMisting}
-                                        value={isMistingEnabled}
-                                    />
-                                </View>
-                                <View style={{ alignItems: 'center' }}>
-                                    <Text style={[style.b14]}>Camera</Text>
-                                    <Switch
-                                        trackColor={{ false: Colors.disable, true: Colors.primary }}
-                                        thumbColor={isCameraEnabled ? Colors.secondary : '#f4f3f4'}
-                                        ios_backgroundColor="#3e3e3e"
-                                        onValueChange={toggleCamera}
-                                        value={isCameraEnabled}
-                                    />
-                                </View>
-                            </View>
-                        )}
-                    </View>
+<View style={[style.box1, style.shadow, { margin: 10, padding: 15, borderRadius: 10 }]}>
+    <TouchableOpacity onPress={() => setIsExpanded(!isExpanded)}>
+        <Text style={[style.s16, { fontWeight: 'bold', color: Colors.txt, textAlign: 'center' }]}>Điều khiển thủ công</Text>
+    </TouchableOpacity>
+    {isExpanded && (
+        <View style={[style.list, { justifyContent: 'space-around', marginTop: 15 }]}>
+            {/* Các công tắc điều khiển */}
+            <View style={{ alignItems: 'center' }}>
+                <Text style={[style.b14]}>Đèn</Text>
+                <Switch
+                    trackColor={{ false: Colors.disable, true: Colors.primary }}
+                    thumbColor={isLightEnabled ? Colors.secondary : '#f4f3f4'}
+                    ios_backgroundColor="#3e3e3e"
+                    onValueChange={toggleLight}
+                    value={isLightEnabled}
+                />
+            </View>
+            <View style={{ alignItems: 'center' }}>
+                <Text style={[style.b14]}>Tưới Nước</Text>
+                <Switch
+                    trackColor={{ false: Colors.disable, true: Colors.primary }}
+                    thumbColor={isWateringEnabled ? Colors.secondary : '#f4f3f4'}
+                    ios_backgroundColor="#3e3e3e"
+                    onValueChange={toggleWatering}
+                    value={isWateringEnabled}
+                />
+            </View>
+            <View style={{ alignItems: 'center' }}>
+                <Text style={[style.b14]}>Phun Sương</Text>
+                <Switch
+                    trackColor={{ false: Colors.disable, true: Colors.primary }}
+                    thumbColor={isMistingEnabled ? Colors.secondary : '#f4f3f4'}
+                    ios_backgroundColor="#3e3e3e"
+                    onValueChange={toggleMisting}
+                    value={isMistingEnabled}
+                />
+            </View>
+            <View style={{ alignItems: 'center' }}>
+                <Text style={[style.b14]}>Camera</Text>
+                <Switch
+                    trackColor={{ false: Colors.disable, true: Colors.primary }}
+                    thumbColor={isCameraEnabled ? Colors.secondary : '#f4f3f4'}
+                    ios_backgroundColor="#3e3e3e"
+                    onValueChange={toggleCamera}
+                    value={isCameraEnabled}
+                />
+            </View>
+        </View>
+    )}
+
+    {/* Nút Save */}
+    {isExpanded && (
+        <TouchableOpacity
+            onPress={() => {
+                updateMode(0); // Cập nhật chế độ sang "Điều khiển thủ công"
+                showToast('success', 'Chế độ đã được cập nhật');
+            }}
+            style={{
+                marginTop: 15,
+                backgroundColor: Colors.primary,
+                paddingVertical: 10,
+                borderRadius: 10,
+                alignItems: 'center',
+            }}
+        >
+            <Text style={[style.b14, { color: Colors.secondary }]}>Save</Text>
+        </TouchableOpacity>
+    )}
+</View>
 
                         {/* Khung "Quan sát bằng camera" */}
             <View style={[style.box1, style.shadow, { margin: 10,marginTop:1, padding: 15, borderRadius: 10, alignItems: 'center' }]}>
@@ -397,9 +482,9 @@ const fetchControlStatus = async () => {
                         </View>
                     </Modal>
 
-                   {/* Modal "Tự động tưới" */}
-                   <Modal transparent={true} visible={visible2}>
-                            <View style={{
+             {/* Modal "Tự động tưới" */}
+             <Modal transparent={true} visible={visible2}>
+             <View style={{
                                 flex: 1,
                                 backgroundColor: '#000000aa',
                             }}>
@@ -428,54 +513,77 @@ const fetchControlStatus = async () => {
                                                 value={isDefaultSetting}
                                             />
                                         </View>
-                                            
+
                                         {/* Custom Settings */}
                                         {!isDefaultSetting && (
                                             <>
-                                                {/* Pump Timer */}
-                                                <Text style={[style.b16, { marginTop: 15 }]}>Pump Timer (hours/day)</Text>
-                                                <Slider
-                                                    style={{ width: '100%', height: 40 }}
-                                                    minimumValue={1}
-                                                    maximumValue={24}
-                                                    step={1}
-                                                    value={pumpTimer}
-                                                    onValueChange={(value) => setPumpTimer(value)}
-                                                    minimumTrackTintColor={Colors.primary}
-                                                    maximumTrackTintColor={Colors.lines1}
-                                                />
-                                                <Text style={[style.s14, { textAlign: 'center', marginTop: 5 }]}>Selected: {pumpTimer} hours/day</Text>
-                                        
-                                                {/* Pump Cycle */}
-                                                <Text style={[style.b16, { marginTop: 15 }]}>Pump Cycle</Text>
-                                                <View style={[style.list, { marginTop: 15, marginBottom: 20 }]}>
-                                                    <Text style={[style.s16, { flex: 1 }]}>On (min)</Text>
-                                                    <View style={[style.list, { flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', marginLeft: 30 }]}>
-                                                        <TouchableOpacity onPress={() => setPumpCycleOn(Math.max(1, pumpCycleOn - 1))}>
-                                                            <Icon name="remove" size={24} color={Colors.icon} />
-                                                        </TouchableOpacity>
-                                        
-                                                        <Text style={[style.b16, { marginHorizontal: 10 }]}>{pumpCycleOn}</Text>
-                                        
-                                                        <TouchableOpacity onPress={() => setPumpCycleOn(pumpCycleOn + 1)}>
-                                                            <Icon style={[style.b16, { marginHorizontal: 10, marginRight: 35 }]} name="add" size={24} color={Colors.icon} />
-                                                        </TouchableOpacity>
-                                                    </View>
-                                                </View>
-                                                <View style={[style.list, { marginTop: 15, marginBottom: 20 }]}>
-                                                    <Text style={[style.s16, { flex: 1 }]}>Rest (hr)</Text>
-                                                    <View style={[style.list, { flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start', marginLeft: 30 }]}>
-                                                        <TouchableOpacity onPress={() => setPumpCycleRest(Math.max(1, pumpCycleRest - 1))}>
-                                                            <Icon name="remove" size={24} color={Colors.icon} />
-                                                        </TouchableOpacity>
-                                        
-                                                        <Text style={[style.b16, { marginHorizontal: 10 }]}>{pumpCycleRest}</Text>
-                                        
-                                                        <TouchableOpacity onPress={() => setPumpCycleRest(pumpCycleRest + 1)}>
-                                                            <Icon style={[style.b16, { marginHorizontal: 10, marginRight: 35 }]} name="add" size={24} color={Colors.icon} />
-                                                        </TouchableOpacity>
-                                                    </View>
-                                                </View>
+                                                {/* Device 1: Đèn */}
+                                                {schedule[0] && (
+                                                    <>
+                                                        <Text style={[style.b16, { marginTop: 15 }]}>Đèn</Text>
+                                                        <View style={[style.list, { marginTop: 10 }]}>
+                                                            <Text style={[style.s16]}>Giờ bật</Text>
+                                                            <TouchableOpacity onPress={() => showStartTimePicker(0)} style={[style.btn, { marginTop: 10 }]}>
+                                                                <Text style={[style.btntxt]}>{formatTime(new Date(schedule[0].turnOnTime[0], schedule[0].turnOnTime[1]))}</Text>
+                                                            </TouchableOpacity>
+                                                            <Text style={[style.s16]}>Giờ tắt</Text>
+                                                            <TouchableOpacity onPress={() => showEndTimePicker(0)} style={[style.btn, { marginTop: 10 }]}>
+                                                                <Text style={[style.btntxt]}>{formatTime(new Date(schedule[0].turnOffTime[0], schedule[0].turnOffTime[1]))}</Text>
+                                                            </TouchableOpacity>
+                                                        </View>
+                                                    </>
+                                                )}
+
+                                                {/* Device 2: Máy bơm nước */}
+                                                {schedule[1] && (
+                                                    <>
+                                                        <Text style={[style.b16, { marginTop: 15 }]}>Máy bơm nước</Text>
+                                                        <View style={[style.list, { marginTop: 10 }]}>
+                                                            <Text style={[style.s16]}>Giờ bật</Text>
+                                                            <TouchableOpacity onPress={() => showStartTimePicker(1)} style={[style.btn, { marginTop: 10 }]}>
+                                                                <Text style={[style.btntxt]}>{formatTime(new Date(schedule[1].turnOnTime[0], schedule[1].turnOnTime[1]))}</Text>
+                                                            </TouchableOpacity>
+                                                            <Text style={[style.s16]}>Giờ tắt</Text>
+                                                            <TouchableOpacity onPress={() => showEndTimePicker(1)} style={[style.btn, { marginTop: 10 }]}>
+                                                                <Text style={[style.btntxt]}>{formatTime(new Date(schedule[1].turnOffTime[0], schedule[1].turnOffTime[1]))}</Text>
+                                                            </TouchableOpacity>
+                                                        </View>
+                                                    </>
+                                                )}
+
+                                                 {/* Device 3: Máy phun sương */}
+                                                 {schedule[2] && (
+                                                    <>
+                                                        <Text style={[style.b16, { marginTop: 15 }]}>Máy phun sương</Text>
+                                                        <View style={[style.list, { marginTop: 10 }]}>
+                                                            <Text style={[style.s16]}>Giờ bật</Text>
+                                                            <TouchableOpacity onPress={() => showStartTimePicker(1)} style={[style.btn, { marginTop: 10 }]}>
+                                                                <Text style={[style.btntxt]}>{formatTime(new Date(schedule[1].turnOnTime[0], schedule[1].turnOnTime[1]))}</Text>
+                                                            </TouchableOpacity>
+                                                            <Text style={[style.s16]}>Giờ tắt</Text>
+                                                            <TouchableOpacity onPress={() => showEndTimePicker(1)} style={[style.btn, { marginTop: 10 }]}>
+                                                                <Text style={[style.btntxt]}>{formatTime(new Date(schedule[1].turnOffTime[0], schedule[1].turnOffTime[1]))}</Text>
+                                                            </TouchableOpacity>
+                                                        </View>
+                                                    </>
+                                                )}
+                                               
+                                                {/* Device 4: camera */}
+                                                {schedule[3] && (
+                                                    <>
+                                                        <Text style={[style.b16, { marginTop: 15 }]}>Camera</Text>
+                                                        <View style={[style.list, { marginTop: 10 }]}>
+                                                            <Text style={[style.s16]}>Giờ bật</Text>
+                                                            <TouchableOpacity onPress={() => showStartTimePicker(1)} style={[style.btn, { marginTop: 10 }]}>
+                                                                <Text style={[style.btntxt]}>{formatTime(new Date(schedule[1].turnOnTime[0], schedule[1].turnOnTime[1]))}</Text>
+                                                            </TouchableOpacity>
+                                                            <Text style={[style.s16]}>Giờ tắt</Text>
+                                                            <TouchableOpacity onPress={() => showEndTimePicker(1)} style={[style.btn, { marginTop: 10 }]}>
+                                                                <Text style={[style.btntxt]}>{formatTime(new Date(schedule[1].turnOffTime[0], schedule[1].turnOffTime[1]))}</Text>
+                                                            </TouchableOpacity>
+                                                        </View>
+                                                    </>
+                                                )}
                                             </>
                                         )}
 
@@ -489,163 +597,27 @@ const fetchControlStatus = async () => {
                                         >
                                             <Text style={[style.btntxt, {}]}>Save</Text>
                                         </TouchableOpacity>
-                                        
+
                                     </View>
                                 </View>
                             </View>
-                </Modal>
+                        </Modal>
 
-                    {/* <Modal transparent={true}
-                        visible={visible4}>
-                        <View style={{
-                            // width: width,
-                            flex: 1,
-                            backgroundColor: '#000000aa',
-                            transparent: 'true'
-                        }}>
-                            <View style={[style.modalcontainer, { backgroundColor: Colors.bg, width: width - 60, marginVertical: 40 }]}>
-                                <View style={{ marginHorizontal: 15 }}>
+                        {/* DateTime Pickers */}
+                        <DateTimePickerModal
+                            isVisible={isStartTimePickerVisible}
+                            mode="time"
+                            onConfirm={handleStartTimeConfirm}
+                            onCancel={() => setStartTimePickerVisible(false)}
+                        />
+                        <DateTimePickerModal
+                            isVisible={isEndTimePickerVisible}
+                            mode="time"
+                            onConfirm={handleEndTimeConfirm}
+                            onCancel={() => setEndTimePickerVisible(false)}
+                        />
 
-                                    <View style={[style.list1]}>
-                                        <View></View>
-                                        <Text style={[style.subtitle, { textAlign: 'center', }]}>Light Customize</Text>
-                                        <TouchableOpacity onPress={() => setVisible4(false)}>
-                                            <Icon name='close' size={24} color={Colors.txt} />
-                                        </TouchableOpacity>
-                                    </View>
-
-                                    <View style={[style.list, { marginTop: 10 }]}>
-                                        <Text style={[style.subtitle, { flex: 1 }]}>Default Settings</Text>
-                                        <Switch
-                                            trackColor={{ false: Colors.disable, true: Colors.primary }}
-                                            thumbColor={isEnabled1 ? Colors.secondary : '#f4f3f4'}
-                                            ios_backgroundColor="#3e3e3e"
-                                            onValueChange={toggleSwitch1}
-                                            value={isEnabled1}
-                                        />
-                                    </View>
-
-                                    <Text style={[style.s12, { marginTop: 5 }]}>Recommend settings for your plant mode. Turn off to customize</Text>
-
-                                    <View style={[style.divider, { marginVertical: 12 }]}></View>
-
-                                    <Text style={[style.b16]}>Set Timer <Text style={[style.s14, { color: Colors.icon }]}>(hours/day)</Text></Text>
-
-                                    <View style={[style.list, { marginTop: 15 }]}>
-                                        <Text style={[style.s16, { flex: 1 }]}>Start</Text>
-                                        <Text style={[style.s16, { marginRight: 5 }]}>8:30 AM</Text>
-                                        <Icon name='chevron-up' size={18} color={Colors.txt} />
-                                    </View>
-
-                                    <View style={[style.list, { justifyContent: 'space-around', marginTop: 15 }]}>
-                                        <View style={{ alignItems: 'center' }}>
-                                            <Icon name='caret-up' size={18} color={Colors.txt} />
-                                            <Text style={[style.b16, { color: Colors.icon }]}>7</Text>
-                                            <View style={{ height: 1, width: 22, backgroundColor: Colors.txt, marginVertical: 5 }}></View>
-                                            <Text style={[style.b16, {}]}>8</Text>
-                                            <View style={{ height: 1, width: 22, backgroundColor: Colors.txt, marginVertical: 5 }}></View>
-                                            <Text style={[style.b16, { color: Colors.icon }]}>9</Text>
-                                        </View>
-                                        <View>
-                                            <View style={{ height: 4, width: 4, backgroundColor: Colors.txt, borderRadius: 5 }}></View>
-                                            <View style={{ height: 4, width: 4, backgroundColor: Colors.txt, borderRadius: 5, marginTop: 5 }}></View>
-                                        </View>
-                                        <View style={{ alignItems: 'center' }}>
-                                            <Icon name='caret-up' size={18} color={Colors.txt} />
-                                            <Text style={[style.b16, { color: Colors.icon }]}>29</Text>
-                                            <View style={{ height: 1, width: 22, backgroundColor: Colors.txt, marginVertical: 5 }}></View>
-                                            <Text style={[style.b16, {}]}>30</Text>
-                                            <View style={{ height: 1, width: 22, backgroundColor: Colors.txt, marginVertical: 5 }}></View>
-                                            <Text style={[style.b16, { color: Colors.icon }]}>31</Text>
-                                        </View>
-                                        <View style={{ alignItems: 'center' }}>
-                                            <Icon name='caret-up' size={18} color={Colors.txt} />
-                                            <Text style={[style.b16, { color: Colors.icon }]}></Text>
-                                            <View style={{ height: 1, width: 22, backgroundColor: Colors.txt, marginVertical: 5 }}></View>
-                                            <Text style={[style.b16, {}]}>AM</Text>
-                                            <View style={{ height: 1, width: 22, backgroundColor: Colors.txt, marginVertical: 5 }}></View>
-                                            <Text style={[style.b16, { color: Colors.icon }]}>PM</Text>
-                                        </View>
-                                    </View>
-
-                                    <View style={[style.list, { marginTop: 15 }]}>
-                                        <Text style={[style.s16, { flex: 1 }]}>End</Text>
-                                        <Text style={[style.s16, { marginRight: 5 }]}>11:30 AM</Text>
-                                        <Icon name='chevron-down' size={18} color={Colors.txt} />
-                                    </View>
-
-                                    <Text style={[style.b16, { marginTop: 10 }]}>Spectrum <Text style={[style.s14, { color: Colors.icon }]}>(nm)</Text></Text>
-
-                                    <View style={[style.list, { marginTop: 15 }]}>
-                                        <Text style={[style.s16]}>Red</Text>
-                                        <View style={{ height: 4, backgroundColor: Colors.lines1, marginLeft: 20, flex: 1,justifyContent:'center' }}>
-                                            <View style={[style.list]}>
-                                                <View style={{height: 4, backgroundColor: Colors.primary,width:width/6.5}}></View>
-                                                <View style={[style.icon2,{height:18,width:18,backgroundColor:Colors.primary}]}></View>
-                                            </View>
-                                        </View>
-                                    </View>
-
-                                    <View style={[style.list, { marginTop: 15 }]}>
-                                        <Text style={[style.s16]}>Blue</Text>
-                                        <View style={{ height: 4, backgroundColor: Colors.lines1, marginLeft: 20, flex: 1,justifyContent:'center' }}>
-                                            <View style={[style.list]}>
-                                                <View style={{height: 4, backgroundColor: '#4C91F8',width:width/3.5}}></View>
-                                                <View style={[style.icon2,{height:18,width:18,backgroundColor:'#4C91F8'}]}></View>
-                                            </View>
-                                        </View>
-                                    </View>
-
-                                    <View style={[style.list, { marginTop: 15 }]}>
-                                        <Text style={[style.s16]}>Yellow</Text>
-                                        <View style={{ height: 4, backgroundColor: Colors.lines1, marginLeft: 20, flex: 1,justifyContent:'center' }}>
-                                            <View style={[style.list]}>
-                                                <View style={{height: 4, backgroundColor: '#F8C84C',width:width/5.5}}></View>
-                                                <View style={[style.icon2,{height:18,width:18,backgroundColor:'#F8C84C'}]}></View>
-                                            </View>
-                                        </View>
-                                    </View>
-
-
-                                    <TouchableOpacity onPress={() => setVisible5(true)}
-                                        style={[style.btn, { marginTop: 20 }]}>
-
-                                        <Modal transparent={true}
-                                            visible={visible5}>
-                                            <View style={{
-                                                // width: width,
-                                                flex: 1,
-                                                backgroundColor: '#000000aa',
-                                                transparent: 'true'
-                                            }}>
-                                                <View style={[style.modalcontainer, { backgroundColor: Colors.bg, width: width - 60, marginVertical: 250 }]}>
-                                                    <View style={{ marginTop: 10, marginHorizontal: 20 }}>
-
-                                                        <Text style={[style.b16, {}]}>Are you sure want to save your setting?</Text>
-
-                                                        <View style={[style.list, { marginTop: 20 }]}>
-                                                            <TouchableOpacity onPress={() => setVisible5(false)} style={[style.btno, { flex: 1 }]}>
-                                                                <Text style={[style.btntxt, { color: Colors.primary }]}>No</Text>
-                                                            </TouchableOpacity>
-                                                            <TouchableOpacity onPress={() => { setVisible5(false), setVisible4(false) }} style={[style.btn, { flex: 1, marginLeft: 10 }]}>
-                                                                <Text style={[style.btntxt, {}]}>YES</Text>
-                                                            </TouchableOpacity>
-                                                        </View>
-
-                                                    </View>
-
-                                                </View>
-                                            </View>
-                                        </Modal>
-
-                                        <Text style={[style.btntxt, {}]}>Save</Text>
-                                    </TouchableOpacity>
-
-                                </View>
-
-                            </View>
-                        </View>
-                    </Modal> */}
+    
 
                 </View>
             </KeyboardAvoidingView>

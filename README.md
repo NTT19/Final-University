@@ -46,6 +46,14 @@ ngày 21/03/2025
 
 - [ ] API đặt lịch tưới: http://plantify.info.vn/api/ledControl GET
 
--- mới 
-
 - [] thay cài đặt thành thông báo
+
+
+-----------------------------------------------------------------
+# Công việc cần thực hiện
++ Ngày 09/04/2025
+- [] Api khuyến nghị
+- [] Api camera
+- [] Api update lịch
+
+
