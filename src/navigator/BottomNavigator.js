@@ -83,7 +83,13 @@ export default function MyTabs() {
   options={{
     tabBarShowLabel: true,
     tabBarLabel: ({ focused, color }) => (
-      <Text style={[style.s15, { color: focused ? Colors.primary : Colors.icon }]}>Thông báo</Text>
+      <Text
+      style={[style.s15, { color: focused ? Colors.primary : Colors.icon }]}
+      numberOfLines={1} 
+      ellipsizeMode="tail"
+    >
+      Thông báo
+    </Text>
     ),
     tabBarIcon: ({ focused, color }) => (
       <Ionicons name={focused ? "notifications" : "notifications-outline"} size={24} color={focused ? Colors.primary : Colors.icon} />
