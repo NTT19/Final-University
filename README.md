@@ -44,9 +44,9 @@ ngày 21/03/2025
 	+ Ledname: led1 = Đèn sợi đốt, led2 = motor tưới gốc, led3 = motor phun sương, led4 = camera
 	+ status: 0 = off, 1 = on
 
-- [ ] API đặt lịch tưới: http://plantify.info.vn/api/ledControl GET
+- [X] API đặt lịch tưới: http://plantify.info.vn/api/ledControl GET
 
-- [] thay cài đặt thành thông báo
+- [X] thay cài đặt thành thông báo
 
 
 -----------------------------------------------------------------
