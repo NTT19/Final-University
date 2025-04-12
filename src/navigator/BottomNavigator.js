@@ -11,6 +11,7 @@ import Setting from '../screens/Setting/Setting';
 import Profile from '../screens/Profile/Profile';
 
 import style from '../theme/style';
+import PotInfo from '../screens/Home/PotInfo';
 
 const Tab = createBottomTabNavigator();
 
@@ -24,7 +25,7 @@ export default function MyTabs() {
         tabBarShowLabel: false,
       }}>
 
-      <Tab.Screen name="Home" component={Home}
+      <Tab.Screen name="PotInfo" component={PotInfo}
         options={{
           tabBarShowLabel: true,
           tabBarLabel: ({ focused, color }) => (
@@ -78,14 +79,14 @@ export default function MyTabs() {
           headerShown: false,
         }} /> */}
 
-<Tab.Screen name="Setting" component={Setting}
+<Tab.Screen name="Notification" component={Setting}
   options={{
     tabBarShowLabel: true,
     tabBarLabel: ({ focused, color }) => (
-      <Text style={[style.s15, { color: focused ? Colors.primary : Colors.icon }]}>Cài đặt</Text>
+      <Text style={[style.s15, { color: focused ? Colors.primary : Colors.icon }]}>Thông báo</Text>
     ),
     tabBarIcon: ({ focused, color }) => (
-      <Ionicons name="settings" size={24} color={focused ? Colors.primary : Colors.icon} />
+      <Ionicons name={focused ? "notifications" : "notifications-outline"} size={24} color={focused ? Colors.primary : Colors.icon} />
     ),
     headerShown: false,
   }}

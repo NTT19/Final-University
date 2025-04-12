@@ -73,7 +73,7 @@ export default function StackNavigator() {
           options={{ headerShown: false }} />
 
         <Stack.Screen
-          name="Setting"
+          name="Notification"
           component={Setting}
           options={{ headerShown: false }} />
 

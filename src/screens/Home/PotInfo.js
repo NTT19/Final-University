@@ -46,12 +46,18 @@ export default function PotInfo() {
     const [isStartTimePickerVisible, setStartTimePickerVisible] = useState(false);
     const [isEndTimePickerVisible, setEndTimePickerVisible] = useState(false);
 
-    const [startTime, setStartTime] = useState('7:00 AM'); // Thời gian bắt đầu
-    const [endTime, setEndTime] = useState('7:00 PM'); // Thời gian kết thúc
+
+
+    const [currentDeviceIndex, setCurrentDeviceIndex] = useState(null); // Lưu trữ chỉ số thiết bị hiện tại
+
+    useEffect(() => {
+        fetchSchedule();  // Fetch schedule data when the component mounts
+    }, []);
 
     const fetchSchedule = async () => {
         try {
             const response = await axios.get('https://plantify.info.vn/api/ledControl');
+            console.log('Fetched schedule:', response.data); // Kiểm tra dữ liệu từ API
             setSchedule(response.data);
         } catch (error) {
             showToast('error', 'Lỗi khi lấy lịch tưới');
@@ -59,34 +65,45 @@ export default function PotInfo() {
         }
     };
 
-    useEffect(() => {
-        fetchSchedule();  // Fetch schedule data when the component mounts
-    }, []);
-
-    const showStartTimePicker = () => setStartTimePickerVisible(true);
+    const showStartTimePicker = (deviceIndex) => {
+        setCurrentDeviceIndex(deviceIndex);
+        setStartTimePickerVisible(true);
+    };
     const hideStartTimePicker = () => setStartTimePickerVisible(false);
 
     // Show End Time Picker
-    const showEndTimePicker = () => setEndTimePickerVisible(true);
+    const showEndTimePicker = (deviceIndex) => {
+        setCurrentDeviceIndex(deviceIndex);
+        setEndTimePickerVisible(true);
+    };
     const hideEndTimePicker = () => setEndTimePickerVisible(false);
 
     // Handle start time selection
-    const handleStartTimeConfirm = (date) => {
-        const formattedTime = formatTime(date);
-        setStartTime(formattedTime);
+    const handleStartTimeConfirm = (date, deviceIndex) => {
+        setSchedule((prevSchedule) => {
+            const updatedSchedule = [...prevSchedule];
+            updatedSchedule[deviceIndex].turnOnTime = [date.getHours(), date.getMinutes()];
+            return updatedSchedule;
+        });
         hideStartTimePicker();
     };
 
     // Handle end time selection
-    const handleEndTimeConfirm = (date) => {
-        const formattedTime = formatTime(date);
-        setEndTime(formattedTime);
+    const handleEndTimeConfirm = (date, deviceIndex) => {
+        setSchedule((prevSchedule) => {
+            const updatedSchedule = [...prevSchedule];
+            updatedSchedule[deviceIndex].turnOffTime = [date.getHours(), date.getMinutes()];
+            return updatedSchedule;
+        });
         hideEndTimePicker();
     };
 
-    const formatTime = (date) => {
-        const hours = date.getHours();
-        const minutes = date.getMinutes();
+    const formatTime = (timeArray) => {
+        if (!timeArray || timeArray.length !== 2) {
+            return 'Invalid Time';
+        }
+    
+        const [hours, minutes] = timeArray;
         const period = hours >= 12 ? 'PM' : 'AM';
         const formattedHours = hours % 12 || 12; // Convert 24-hour time to 12-hour format
         const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
@@ -94,21 +111,56 @@ export default function PotInfo() {
     };
 
     const saveSchedule = async () => {
-        try {
-            const updatedSchedule = schedule.map(device => {
-                if (device.ledName === 'led1') {
-                    device.turnOnTime = startTime.split(':')[0];
-                    device.turnOffTime = endTime.split(':')[0];
+        const formatTime = (timeArray) => {
+            const [hours, minutes] = timeArray;
+            const formattedHours = hours < 10 ? `0${hours}` : hours; // Ensure 2 digits for hours
+            const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes; // Ensure 2 digits for minutes
+            return `${formattedHours}:${formattedMinutes}:00`; // Add seconds as "00"
+        };
+    
+        // Loop through each device and send an update request for each one
+        for (let i = 0; i < schedule.length; i++) {
+            const device = schedule[i];
+    
+            // Prepare the request data for this device
+            const updateData = {
+                id: device.id,
+                turnOnTime: formatTime(device.turnOnTime),
+                turnOffTime: formatTime(device.turnOffTime),
+            };
+    
+            console.log(`Sending update for device ${device.id}:`, updateData);
+    
+            try {
+                // Send the update for each device separately
+                const response = await axios.put(
+                    'https://plantify.info.vn/api/ledControl/updateLedControl',
+                    updateData,
+                    { headers: { 'Content-Type': 'application/json' } }
+                );
+    
+                // Log the response from the server for each device
+                console.log('Save response for device', device.id, response.data);
+    
+                // Show success message for each device update
+              //  showToast('success', `Lịch tưới cho thiết bị đã được cập nhật thành công`);
+            } catch (error) {
+                // Log and handle errors individually for each device
+                if (error.response) {
+                    console.error(`Error response for device ${device.id}:`, error.response.data);
+                 //   showToast('error', `Lỗi khi cập nhật lịch cho thiết bị ${device.id}`);
+                } else if (error.request) {
+                    console.error(`Error request for device ${device.id}:`, error.request);
+                  //  showToast('error', `Không nhận được phản hồi cho thiết bị ${device.id}`);
+                } else {
+                    console.error(`Error message for device ${device.id}:`, error.message);
+                   // showToast('error', `Lỗi không xác định cho thiết bị ${device.id}`);
                 }
-                return device;
-            });
-            await axios.put('https://plantify.info.vn/api/ledControl', updatedSchedule);
-            showToast('success', 'Cập nhật lịch thành công');
-            setVisible2(false);
-        } catch (error) {
-            showToast('error', 'Lỗi khi cập nhật lịch');
-            console.error(error);
+            }
         }
+    
+        // Close the modal after all requests are sent
+        setVisible2(false);
     };
 
    
@@ -173,10 +225,18 @@ const fetchControlStatus = async () => {
   useEffect(() => {
     fetchControlStatus();  // Lấy trạng thái điều khiển ngay khi component được render
 
-    const interval = setInterval(fetchControlStatus, 2000);  // Định kỳ lấy trạng thái mỗi 10 giây
+    const interval = setInterval(fetchControlStatus, 2000);  // Định kỳ lấy trạng thái mỗi 2 giây
 
     return () => clearInterval(interval);  // Dọn dẹp interval khi component bị unmount
   }, []);
+
+// Theo dõi trạng thái isDefaultSetting
+useEffect(() => {
+    if (!isDefaultSetting) {
+        // Chỉ gọi API khi chuyển sang chế độ "Custom Settings"
+        fetchSchedule();
+    }
+}, [isDefaultSetting]);
 
  // Hàm bật/tắt với API
  const toggleLight = async () => {
@@ -319,7 +379,7 @@ const fetchControlStatus = async () => {
    
   {/* Khung "Tự động tưới" */}
   <View style={[style.box1, style.shadow, { margin: 10, padding: 15, borderRadius: 10 }]}>
-                        <TouchableOpacity onPress={() => { setVisible2(true); updateMode(2); }}>
+                        <TouchableOpacity onPress={() => {  fetchSchedule(); setVisible2(true);   setIsExpanded(false); }}>
                             <Text style={[style.s16, { fontWeight: 'bold', color: Colors.txt, textAlign: 'center' }]}>Tự động tưới</Text>
                         </TouchableOpacity>
                     </View>
@@ -380,6 +440,7 @@ const fetchControlStatus = async () => {
         <TouchableOpacity
             onPress={() => {
                 updateMode(0); // Cập nhật chế độ sang "Điều khiển thủ công"
+                setIsExpanded(false); // Đóng phần mở rộng
                 showToast('success', 'Chế độ đã được cập nhật');
             }}
             style={{
@@ -514,90 +575,150 @@ const fetchControlStatus = async () => {
                                             />
                                         </View>
 
-                                        {/* Custom Settings */}
-                                        {!isDefaultSetting && (
-                                            <>
-                                                {/* Device 1: Đèn */}
-                                                {schedule[0] && (
-                                                    <>
-                                                        <Text style={[style.b16, { marginTop: 15 }]}>Đèn</Text>
-                                                        <View style={[style.list, { marginTop: 10 }]}>
-                                                            <Text style={[style.s16]}>Giờ bật</Text>
-                                                            <TouchableOpacity onPress={() => showStartTimePicker(0)} style={[style.btn, { marginTop: 10 }]}>
-                                                                <Text style={[style.btntxt]}>{formatTime(new Date(schedule[0].turnOnTime[0], schedule[0].turnOnTime[1]))}</Text>
-                                                            </TouchableOpacity>
-                                                            <Text style={[style.s16]}>Giờ tắt</Text>
-                                                            <TouchableOpacity onPress={() => showEndTimePicker(0)} style={[style.btn, { marginTop: 10 }]}>
-                                                                <Text style={[style.btntxt]}>{formatTime(new Date(schedule[0].turnOffTime[0], schedule[0].turnOffTime[1]))}</Text>
-                                                            </TouchableOpacity>
-                                                        </View>
-                                                    </>
-                                                )}
+{/* Hiển thị nút Save riêng khi Default Settings được bật */}
+{isDefaultSetting && (
+    <TouchableOpacity
+        onPress={() => {
+            updateMode(1); // Cập nhật chế độ sang "Default Settings"
+            setVisible2(false);
+            showToast('success', 'Chế độ mặc định đã được cập nhật');
+        }}
+        style={{
+            marginTop: 20,
+            backgroundColor: Colors.primary,
+            paddingVertical: 10,
+            borderRadius: 10,
+            alignItems: 'center',
+        }}
+    >
+        <Text style={[style.btntxt, { color: Colors.secondary }]}>Save</Text>
+    </TouchableOpacity>
+)}
 
-                                                {/* Device 2: Máy bơm nước */}
-                                                {schedule[1] && (
-                                                    <>
-                                                        <Text style={[style.b16, { marginTop: 15 }]}>Máy bơm nước</Text>
-                                                        <View style={[style.list, { marginTop: 10 }]}>
-                                                            <Text style={[style.s16]}>Giờ bật</Text>
-                                                            <TouchableOpacity onPress={() => showStartTimePicker(1)} style={[style.btn, { marginTop: 10 }]}>
-                                                                <Text style={[style.btntxt]}>{formatTime(new Date(schedule[1].turnOnTime[0], schedule[1].turnOnTime[1]))}</Text>
-                                                            </TouchableOpacity>
-                                                            <Text style={[style.s16]}>Giờ tắt</Text>
-                                                            <TouchableOpacity onPress={() => showEndTimePicker(1)} style={[style.btn, { marginTop: 10 }]}>
-                                                                <Text style={[style.btntxt]}>{formatTime(new Date(schedule[1].turnOffTime[0], schedule[1].turnOffTime[1]))}</Text>
-                                                            </TouchableOpacity>
-                                                        </View>
-                                                    </>
-                                                )}
 
-                                                 {/* Device 3: Máy phun sương */}
-                                                 {schedule[2] && (
-                                                    <>
-                                                        <Text style={[style.b16, { marginTop: 15 }]}>Máy phun sương</Text>
-                                                        <View style={[style.list, { marginTop: 10 }]}>
-                                                            <Text style={[style.s16]}>Giờ bật</Text>
-                                                            <TouchableOpacity onPress={() => showStartTimePicker(1)} style={[style.btn, { marginTop: 10 }]}>
-                                                                <Text style={[style.btntxt]}>{formatTime(new Date(schedule[1].turnOnTime[0], schedule[1].turnOnTime[1]))}</Text>
-                                                            </TouchableOpacity>
-                                                            <Text style={[style.s16]}>Giờ tắt</Text>
-                                                            <TouchableOpacity onPress={() => showEndTimePicker(1)} style={[style.btn, { marginTop: 10 }]}>
-                                                                <Text style={[style.btntxt]}>{formatTime(new Date(schedule[1].turnOffTime[0], schedule[1].turnOffTime[1]))}</Text>
-                                                            </TouchableOpacity>
-                                                        </View>
-                                                    </>
-                                                )}
-                                               
-                                                {/* Device 4: camera */}
-                                                {schedule[3] && (
-                                                    <>
-                                                        <Text style={[style.b16, { marginTop: 15 }]}>Camera</Text>
-                                                        <View style={[style.list, { marginTop: 10 }]}>
-                                                            <Text style={[style.s16]}>Giờ bật</Text>
-                                                            <TouchableOpacity onPress={() => showStartTimePicker(1)} style={[style.btn, { marginTop: 10 }]}>
-                                                                <Text style={[style.btntxt]}>{formatTime(new Date(schedule[1].turnOnTime[0], schedule[1].turnOnTime[1]))}</Text>
-                                                            </TouchableOpacity>
-                                                            <Text style={[style.s16]}>Giờ tắt</Text>
-                                                            <TouchableOpacity onPress={() => showEndTimePicker(1)} style={[style.btn, { marginTop: 10 }]}>
-                                                                <Text style={[style.btntxt]}>{formatTime(new Date(schedule[1].turnOffTime[0], schedule[1].turnOffTime[1]))}</Text>
-                                                            </TouchableOpacity>
-                                                        </View>
-                                                    </>
-                                                )}
-                                            </>
-                                        )}
+                                       {/* Custom Settings */}
+{!isDefaultSetting && (
+    <>
+        {/* Device 1: Đèn */}
+        {schedule && schedule[0] && (
+            <>
+                <Text style={[style.b16, { marginTop: 15 }]}>Đèn</Text>
+                <View style={[style.list, { marginTop: 10 }]}>
+                    <Text style={[style.s16]}>Giờ bật</Text>
+                    <TouchableOpacity onPress={() => showStartTimePicker(0)} style={[style.btn, { marginTop: 10 }]}>
+                        <Text style={[style.btntxt]}>
+                            {schedule[0].turnOnTime && schedule[0].turnOnTime.length > 0
+                                ? formatTime(schedule[0].turnOnTime)
+                                : 'Chưa đặt'}
+                        </Text>
+                    </TouchableOpacity>
+                    <Text style={[style.s16]}>Giờ tắt</Text>
+                    <TouchableOpacity onPress={() => showEndTimePicker(0)} style={[style.btn, { marginTop: 10 }]}>
+                        <Text style={[style.btntxt]}>
+                            {schedule[0].turnOffTime && schedule[0].turnOffTime.length > 0
+                                ? formatTime(schedule[0].turnOffTime)
+                                : 'Chưa đặt'}
+                        </Text>
+                    </TouchableOpacity>
+                </View>
+            </>
+        )}
 
-                                        {/* Save Button */}
-                                        <TouchableOpacity
-                                            onPress={() => {
-                                                updateMode(tempMode); // Cập nhật chế độ khi nhấn Save
-                                                setVisible2(false); // Đóng Modal
-                                            }}
-                                            style={[style.btn, { marginTop: 30 }]}
-                                        >
-                                            <Text style={[style.btntxt, {}]}>Save</Text>
-                                        </TouchableOpacity>
+        {/* Các thiết bị khác */}
+        {/* Device 2: Máy bơm nước */}
+        {schedule && schedule[1] && (
+            <>
+                <Text style={[style.b16, { marginTop: 15 }]}>Máy bơm nước</Text>
+                <View style={[style.list, { marginTop: 10 }]}>
+                    <Text style={[style.s16]}>Giờ bật</Text>
+                    <TouchableOpacity onPress={() => showStartTimePicker(1)} style={[style.btn, { marginTop: 10 }]}>
+                        <Text style={[style.btntxt]}>
+                            {schedule[1].turnOnTime && schedule[1].turnOnTime.length > 0
+                                ? formatTime(schedule[1].turnOnTime)
+                                : 'Chưa đặt'}
+                        </Text>
+                    </TouchableOpacity>
+                    <Text style={[style.s16]}>Giờ tắt</Text>
+                    <TouchableOpacity onPress={() => showEndTimePicker(1)} style={[style.btn, { marginTop: 10 }]}>
+                        <Text style={[style.btntxt]}>
+                            {schedule[1].turnOffTime && schedule[1].turnOffTime.length > 0
+                                ? formatTime(schedule[1].turnOffTime)
+                                : 'Chưa đặt'}
+                        </Text>
+                    </TouchableOpacity>
+                </View>
+            </>
+        )}
 
+        {/* Device 3: Máy phun sương */}
+        {schedule && schedule[2] && (
+            <>
+                <Text style={[style.b16, { marginTop: 15 }]}>Máy phun sương</Text>
+                <View style={[style.list, { marginTop: 10 }]}>
+                    <Text style={[style.s16]}>Giờ bật</Text>
+                    <TouchableOpacity onPress={() => showStartTimePicker(2)} style={[style.btn, { marginTop: 10 }]}>
+                        <Text style={[style.btntxt]}>
+                            {schedule[2].turnOnTime && schedule[2].turnOnTime.length > 0
+                                ? formatTime(schedule[2].turnOnTime)
+                                : 'Chưa đặt'}
+                        </Text>
+                    </TouchableOpacity>
+                    <Text style={[style.s16]}>Giờ tắt</Text>
+                    <TouchableOpacity onPress={() => showEndTimePicker(2)} style={[style.btn, { marginTop: 10 }]}>
+                        <Text style={[style.btntxt]}>
+                            {schedule[2].turnOffTime && schedule[2].turnOffTime.length > 0
+                                ? formatTime(schedule[2].turnOffTime)
+                                : 'Chưa đặt'}
+                        </Text>
+                    </TouchableOpacity>
+                </View>
+            </>
+        )}
+
+        {/* Device 4: Camera */}
+        {schedule && schedule[3] && (
+            <>
+                <Text style={[style.b16, { marginTop: 15 }]}>Camera</Text>
+                <View style={[style.list, { marginTop: 10 }]}>
+                    <Text style={[style.s16]}>Giờ bật</Text>
+                    <TouchableOpacity onPress={() => showStartTimePicker(3)} style={[style.btn, { marginTop: 10 }]}>
+                        <Text style={[style.btntxt]}>
+                            {schedule[3].turnOnTime && schedule[3].turnOnTime.length > 0
+                                ? formatTime(schedule[3].turnOnTime)
+                                : 'Chưa đặt'}
+                        </Text>
+                    </TouchableOpacity>
+                    <Text style={[style.s16]}>Giờ tắt</Text>
+                    <TouchableOpacity onPress={() => showEndTimePicker(3)} style={[style.btn, { marginTop: 10 }]}>
+                        <Text style={[style.btntxt]}>
+                            {schedule[3].turnOffTime && schedule[3].turnOffTime.length > 0
+                                ? formatTime(schedule[3].turnOffTime)
+                                : 'Chưa đặt'}
+                        </Text>
+                    </TouchableOpacity>
+                </View>
+            </>
+        )}
+
+        {/* Nút Save riêng cho Custom Settings */}
+        <TouchableOpacity
+            onPress={() => {
+                saveSchedule(); // Lưu lịch trình
+                setVisible2(false);
+                showToast('success', 'Lịch trình đã được cập nhật');
+            }}
+            style={{
+                marginTop: 20,
+                backgroundColor: Colors.primary,
+                paddingVertical: 10,
+                borderRadius: 10,
+                alignItems: 'center',
+            }}
+        >
+            <Text style={[style.btntxt, { color: Colors.secondary }]}>Save</Text>
+        </TouchableOpacity>
+    </>
+)}
                                     </View>
                                 </View>
                             </View>
@@ -605,17 +726,17 @@ const fetchControlStatus = async () => {
 
                         {/* DateTime Pickers */}
                         <DateTimePickerModal
-                            isVisible={isStartTimePickerVisible}
-                            mode="time"
-                            onConfirm={handleStartTimeConfirm}
-                            onCancel={() => setStartTimePickerVisible(false)}
-                        />
-                        <DateTimePickerModal
-                            isVisible={isEndTimePickerVisible}
-                            mode="time"
-                            onConfirm={handleEndTimeConfirm}
-                            onCancel={() => setEndTimePickerVisible(false)}
-                        />
+    isVisible={isStartTimePickerVisible}
+    mode="time"
+    onConfirm={(date) => handleStartTimeConfirm(date, currentDeviceIndex)}
+    onCancel={() => setStartTimePickerVisible(false)}
+/>
+<DateTimePickerModal
+    isVisible={isEndTimePickerVisible}
+    mode="time"
+    onConfirm={(date) => handleEndTimeConfirm(date, currentDeviceIndex)}
+    onCancel={() => setEndTimePickerVisible(false)}
+/>
 
     
 
