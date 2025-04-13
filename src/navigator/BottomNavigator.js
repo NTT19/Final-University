@@ -12,6 +12,7 @@ import Profile from '../screens/Profile/Profile';
 
 import style from '../theme/style';
 import PotInfo from '../screens/Home/PotInfo';
+import Dashboard from '../screens/DashBoard/DashBoard';
 
 const Tab = createBottomTabNavigator();
 
@@ -39,7 +40,7 @@ export default function MyTabs() {
       />
 
 
-      <Tab.Screen name="Dashboard" component={Home}
+      <Tab.Screen name="Dashboard" component={Dashboard}
           options={{
             tabBarShowLabel: true,
             tabBarLabel: ({ focused, color }) => (

@@ -22,16 +22,16 @@ export default function Home() {
         // Lấy dữ liệu từ API khi component được mount
         const fetchData = async () => {
             try {
-                const data = await sensorReadingApi.getSensorReading(); 
-                setSensorData(data);  
+                const data = await sensorReadingApi.getSensorReading();
+                setSensorData(data);
             } catch (err) {
-                setError("Error fetching sensor data");  
+                setError("Error fetching sensor data");
             } finally {
-                setLoading(false); 
+                setLoading(false);
             }
         };
 
-        fetchData(); 
+        fetchData();
     }, []);
 
     return (
@@ -88,73 +88,73 @@ export default function Home() {
                                         </TouchableOpacity>
 
                                         {/* Hiển thị dữ liệu sensor */}
-                                        <View style={[style.box1, style.shadow, style.list,  { margin: 5, marginTop: 5, backgroundColor: '#ecf0f1' }]}>
-                                              <View style={{ flex: 1 }}>
-                                               <View style={[style.list]}>
-                                                   <Icon name='sunny-outline' size={20} color={Colors.primary} />
-                                                   {/* Lấy phần tử cuối cùng trong mảng để hiển thị thông tin Lux */}
-                                                   <Text style={[style.s14, { marginLeft: 7 }]}>Lux: {sensorData?.[sensorData.length - 1]?.lux} lx</Text>
-                                               </View>
-                                               <View style={[style.list, { marginTop: 7 }]}>
-                                                   <Icon name='water-outline' size={20} color={Colors.primary} />
-                                                   {/* Lấy phần tử cuối cùng trong mảng để hiển thị thông tin Water Meter */}
-                                                   <Text style={[style.s14, { marginLeft: 7 }]}>Water Meter: {sensorData?.[sensorData.length - 1]?.waterMeter} L</Text>
-                                               </View>
-                                               <View style={[style.list, { marginTop: 7 }]}>
-                                                   <Icon name='thermometer-outline' size={20} color={Colors.primary} />
-                                                   {/* Lấy phần tử cuối cùng trong mảng để hiển thị thông tin Temperature */}
-                                                   <Text style={[style.s14, { marginLeft: 7 }]}>Temperature: {sensorData?.[sensorData.length - 1]?.temperature}°C</Text>
-                                               </View>
-                                                                                
-                                               <View style={[style.list, { marginTop: 7 }]}>
-                                                   <Icon name='heart-outline' size={20} color={Colors.primary} />
-                                                   {/* Lấy phần tử cuối cùng trong mảng để hiển thị thông tin Humidity */}
-                                                   <Text style={[style.s14, { marginLeft: 7 }]}>Humidity: {sensorData?.[sensorData.length - 1]?.humidity}%</Text>
-                                               </View>
-                                                                                
-                                               {/* Thêm các thông tin mới */}
-                                               <View style={[style.list, { marginTop: 7 }]}>
-                                                   <Icon name='leaf-outline' size={20} color={Colors.primary} />
-                                                   {/* Lấy phần tử cuối cùng trong mảng để hiển thị thông tin Nitrogen */}
-                                                   <Text style={[style.s14, { marginLeft: 7 }]}>Nitrogen: {sensorData?.[sensorData.length - 1]?.nitrogen} ppm</Text>
-                                               </View>
-                                               <View style={[style.list, { marginTop: 7 }]}>
-                                                   <Icon name='leaf-outline' size={20} color={Colors.primary} />
-                                                   {/* Lấy phần tử cuối cùng trong mảng để hiển thị thông tin Phosphorus */}
-                                                   <Text style={[style.s14, { marginLeft: 7 }]}>Phosphorus: {sensorData?.[sensorData.length - 1]?.phosphorus} ppm</Text>
-                                               </View>
-                                               <View style={[style.list, { marginTop: 7 }]}>
-                                                   <Icon name='leaf-outline' size={20} color={Colors.primary} />
-                                                   {/* Lấy phần tử cuối cùng trong mảng để hiển thị thông tin Potassium */}
-                                                   <Text style={[style.s14, { marginLeft: 7 }]}>Potassium: {sensorData?.[sensorData.length - 1]?.potassium} ppm</Text>
-                                               </View>
-                                               <View style={[style.list, { marginTop: 7 }]}>
-                                                   <Icon name='water-outline' size={20} color={Colors.primary} />
-                                                   {/* Lấy phần tử cuối cùng trong mảng để hiển thị thông tin Soil Conductivity */}
-                                                   <Text style={[style.s14, { marginLeft: 7 }]}>Soil Conductivity: {sensorData?.[sensorData.length - 1]?.soilConductivity} mS/cm</Text>
-                                               </View>
-                                               <View style={[style.list, { marginTop: 7 }]}>
-                                                   <Icon name='flask-outline' size={20} color={Colors.primary} />
-                                                   {/* Lấy phần tử cuối cùng trong mảng để hiển thị thông tin Soil pH */}
-                                                   <Text style={[style.s14, { marginLeft: 7 }]}>Soil pH: {sensorData?.[sensorData.length - 1]?.soilPH}</Text>
-                                               </View>
-                                               <View style={[style.list, { marginTop: 7 }]}>
-                                                   <Icon name='thermometer-outline' size={20} color={Colors.primary} />
-                                                   {/* Lấy phần tử cuối cùng trong mảng để hiển thị thông tin Soil Temperature */}
-                                                   <Text style={[style.s14, { marginLeft: 7 }]}>Soil Temperature: {sensorData?.[sensorData.length - 1]?.soilTemperature}°C</Text>
-                                               </View>
-                                               <View style={[style.list, { marginTop: 7 }]}>
-                                                   <Icon name='cloud-outline' size={20} color={Colors.primary} />
-                                                   {/* Lấy phần tử cuối cùng trong mảng để hiển thị thông tin Weather */}
-                                                   <Text style={[style.s14, { marginLeft: 7 }]}>Weather: {sensorData?.[sensorData.length - 1]?.weather}</Text>
-                                               </View>
+                                        <View style={[style.box1, style.shadow, style.list, { margin: 5, marginTop: 5, backgroundColor: '#ecf0f1' }]}>
+                                            <View style={{ flex: 1 }}>
+                                                <View style={[style.list]}>
+                                                    <Icon name='sunny-outline' size={20} color={Colors.primary} />
+                                                    {/* Lấy phần tử cuối cùng trong mảng để hiển thị thông tin Lux */}
+                                                    <Text style={[style.s14, { marginLeft: 7 }]}>Lux: {sensorData?.[sensorData.length - 1]?.lux} lx</Text>
+                                                </View>
+                                                <View style={[style.list, { marginTop: 7 }]}>
+                                                    <Icon name='water-outline' size={20} color={Colors.primary} />
+                                                    {/* Lấy phần tử cuối cùng trong mảng để hiển thị thông tin Water Meter */}
+                                                    <Text style={[style.s14, { marginLeft: 7 }]}>Water Meter: {sensorData?.[sensorData.length - 1]?.waterMeter} L</Text>
+                                                </View>
+                                                <View style={[style.list, { marginTop: 7 }]}>
+                                                    <Icon name='thermometer-outline' size={20} color={Colors.primary} />
+                                                    {/* Lấy phần tử cuối cùng trong mảng để hiển thị thông tin Temperature */}
+                                                    <Text style={[style.s14, { marginLeft: 7 }]}>Temperature: {sensorData?.[sensorData.length - 1]?.temperature}°C</Text>
+                                                </View>
+
+                                                <View style={[style.list, { marginTop: 7 }]}>
+                                                    <Icon name='heart-outline' size={20} color={Colors.primary} />
+                                                    {/* Lấy phần tử cuối cùng trong mảng để hiển thị thông tin Humidity */}
+                                                    <Text style={[style.s14, { marginLeft: 7 }]}>Humidity: {sensorData?.[sensorData.length - 1]?.humidity}%</Text>
+                                                </View>
+
+                                                {/* Thêm các thông tin mới */}
+                                                <View style={[style.list, { marginTop: 7 }]}>
+                                                    <Icon name='leaf-outline' size={20} color={Colors.primary} />
+                                                    {/* Lấy phần tử cuối cùng trong mảng để hiển thị thông tin Nitrogen */}
+                                                    <Text style={[style.s14, { marginLeft: 7 }]}>Nitrogen: {sensorData?.[sensorData.length - 1]?.nitrogen} ppm</Text>
+                                                </View>
+                                                <View style={[style.list, { marginTop: 7 }]}>
+                                                    <Icon name='leaf-outline' size={20} color={Colors.primary} />
+                                                    {/* Lấy phần tử cuối cùng trong mảng để hiển thị thông tin Phosphorus */}
+                                                    <Text style={[style.s14, { marginLeft: 7 }]}>Phosphorus: {sensorData?.[sensorData.length - 1]?.phosphorus} ppm</Text>
+                                                </View>
+                                                <View style={[style.list, { marginTop: 7 }]}>
+                                                    <Icon name='leaf-outline' size={20} color={Colors.primary} />
+                                                    {/* Lấy phần tử cuối cùng trong mảng để hiển thị thông tin Potassium */}
+                                                    <Text style={[style.s14, { marginLeft: 7 }]}>Potassium: {sensorData?.[sensorData.length - 1]?.potassium} ppm</Text>
+                                                </View>
+                                                <View style={[style.list, { marginTop: 7 }]}>
+                                                    <Icon name='water-outline' size={20} color={Colors.primary} />
+                                                    {/* Lấy phần tử cuối cùng trong mảng để hiển thị thông tin Soil Conductivity */}
+                                                    <Text style={[style.s14, { marginLeft: 7 }]}>Soil Conductivity: {sensorData?.[sensorData.length - 1]?.soilConductivity} mS/cm</Text>
+                                                </View>
+                                                <View style={[style.list, { marginTop: 7 }]}>
+                                                    <Icon name='flask-outline' size={20} color={Colors.primary} />
+                                                    {/* Lấy phần tử cuối cùng trong mảng để hiển thị thông tin Soil pH */}
+                                                    <Text style={[style.s14, { marginLeft: 7 }]}>Soil pH: {sensorData?.[sensorData.length - 1]?.soilPH}</Text>
+                                                </View>
+                                                <View style={[style.list, { marginTop: 7 }]}>
+                                                    <Icon name='thermometer-outline' size={20} color={Colors.primary} />
+                                                    {/* Lấy phần tử cuối cùng trong mảng để hiển thị thông tin Soil Temperature */}
+                                                    <Text style={[style.s14, { marginLeft: 7 }]}>Soil Temperature: {sensorData?.[sensorData.length - 1]?.soilTemperature}°C</Text>
+                                                </View>
+                                                <View style={[style.list, { marginTop: 7 }]}>
+                                                    <Icon name='cloud-outline' size={20} color={Colors.primary} />
+                                                    {/* Lấy phần tử cuối cùng trong mảng để hiển thị thông tin Weather */}
+                                                    <Text style={[style.s14, { marginLeft: 7 }]}>Weather: {sensorData?.[sensorData.length - 1]?.weather}</Text>
+                                                </View>
                                             </View>
-                                    </View>
+                                        </View>
 
                                     </View>
                                 ) : null}
-            
-                           
+
+
                                 {/* <View style={[style.list, { marginTop: 20, justifyContent: 'space-around' }]}>
                                     <View style={{ alignItems: 'center' }}>
                                         <Text style={[style.b14]}>Nước</Text>

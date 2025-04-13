@@ -40,6 +40,7 @@ import Info from '../screens/Store/Info';
 import MyCart from '../screens/Store/MyCart';
 import Checkout from '../screens/Store/Checkout';
 import MyTabs from './BottomNavigator';
+import Dashboard from '../screens/DashBoard/DashBoard';
 
 const Stack = createNativeStackNavigator();
 
@@ -199,7 +200,10 @@ export default function StackNavigator() {
           name="Intro1"
           component={Intro1}
           options={{ headerShown: false }} />
-
+        <Stack.Screen
+          name="DashBoard"
+          component={Dashboard}
+          options={{ headerShown: false }} />
 
       </Stack.Navigator>
     </NavigationContainer>
