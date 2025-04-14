@@ -312,7 +312,7 @@ export default function PotInfo() {
                     <AppBar
                         elevation={0}
                         color={Colors.bg}
-                        leading={<TouchableOpacity onPress={() => navigation.navigate('MyTabs')} >
+                        leading={<TouchableOpacity onPress={() => navigation.navigate('Home')} >
                             <Icon name='arrow-back' size={24} color={Colors.txt} />
                         </TouchableOpacity>}
                         trailing={<HStack>
@@ -554,7 +554,7 @@ export default function PotInfo() {
 
                                     <View style={[style.list1]}>
                                         <View></View>
-                                        <Text style={[style.subtitle, { textAlign: 'center' }]}>Water Customize</Text>
+                                        <Text style={[style.subtitle, { textAlign: 'center' }]}>Điều chỉnh tưới nước</Text>
                                         <TouchableOpacity onPress={() => setVisible2(false)}>
                                             <Icon name='close' size={24} color={Colors.txt} />
                                         </TouchableOpacity>
@@ -562,7 +562,7 @@ export default function PotInfo() {
 
                                     {/* Default Settings Switch */}
                                     <View style={[style.list, { marginTop: 10 }]}>
-                                        <Text style={[style.subtitle, { flex: 1 }]}>Default Settings</Text>
+                                        <Text style={[style.subtitle, { flex: 1 }]}>Cài đặt mặc định</Text>
                                         <Switch
                                             trackColor={{ false: Colors.disable, true: Colors.primary }}
                                             thumbColor={isDefaultSetting ? Colors.secondary : '#f4f3f4'}
@@ -605,15 +605,15 @@ export default function PotInfo() {
                                                     <Text style={[style.b16, { marginTop: 15 }]}>Đèn</Text>
                                                     <View style={[style.list, { marginTop: 10 }]}>
                                                         <Text style={[style.s16]}>Giờ bật</Text>
-                                                        <TouchableOpacity onPress={() => showStartTimePicker(0)} style={[style.btn, { marginTop: 10 }]}>
+                                                        <TouchableOpacity onPress={() => showStartTimePicker(0)} style={[style.btn, { marginTop: 5, marginLeft:10, width:90 }]}>
                                                             <Text style={[style.btntxt]}>
                                                                 {schedule[0].turnOnTime && schedule[0].turnOnTime.length > 0
                                                                     ? formatTime(schedule[0].turnOnTime)
                                                                     : 'Chưa đặt'}
                                                             </Text>
                                                         </TouchableOpacity>
-                                                        <Text style={[style.s16]}>Giờ tắt</Text>
-                                                        <TouchableOpacity onPress={() => showEndTimePicker(0)} style={[style.btn, { marginTop: 10 }]}>
+                                                        <Text style={[style.s16, {marginLeft: 10}]}>Giờ tắt</Text>
+                                                        <TouchableOpacity onPress={() => showEndTimePicker(0)} style={[style.btn, { marginTop: 5, marginLeft:10, width:90 }]}>
                                                             <Text style={[style.btntxt]}>
                                                                 {schedule[0].turnOffTime && schedule[0].turnOffTime.length > 0
                                                                     ? formatTime(schedule[0].turnOffTime)
@@ -631,15 +631,15 @@ export default function PotInfo() {
                                                     <Text style={[style.b16, { marginTop: 15 }]}>Máy bơm nước</Text>
                                                     <View style={[style.list, { marginTop: 10 }]}>
                                                         <Text style={[style.s16]}>Giờ bật</Text>
-                                                        <TouchableOpacity onPress={() => showStartTimePicker(1)} style={[style.btn, { marginTop: 10 }]}>
+                                                        <TouchableOpacity onPress={() => showStartTimePicker(1)} style={[style.btn, { marginTop: 5, marginLeft:10, width:90 }]}>
                                                             <Text style={[style.btntxt]}>
                                                                 {schedule[1].turnOnTime && schedule[1].turnOnTime.length > 0
                                                                     ? formatTime(schedule[1].turnOnTime)
                                                                     : 'Chưa đặt'}
                                                             </Text>
                                                         </TouchableOpacity>
-                                                        <Text style={[style.s16]}>Giờ tắt</Text>
-                                                        <TouchableOpacity onPress={() => showEndTimePicker(1)} style={[style.btn, { marginTop: 10 }]}>
+                                                        <Text style={[style.s16, {marginLeft: 10}]}>Giờ tắt</Text>
+                                                        <TouchableOpacity onPress={() => showEndTimePicker(1)} style={[style.btn, { marginTop: 5, marginLeft:10, width:90 }]}>
                                                             <Text style={[style.btntxt]}>
                                                                 {schedule[1].turnOffTime && schedule[1].turnOffTime.length > 0
                                                                     ? formatTime(schedule[1].turnOffTime)
@@ -656,15 +656,15 @@ export default function PotInfo() {
                                                     <Text style={[style.b16, { marginTop: 15 }]}>Máy phun sương</Text>
                                                     <View style={[style.list, { marginTop: 10 }]}>
                                                         <Text style={[style.s16]}>Giờ bật</Text>
-                                                        <TouchableOpacity onPress={() => showStartTimePicker(2)} style={[style.btn, { marginTop: 10 }]}>
+                                                        <TouchableOpacity onPress={() => showStartTimePicker(2)} style={[style.btn, { marginTop: 5, marginLeft:10, width:90 }]}>
                                                             <Text style={[style.btntxt]}>
                                                                 {schedule[2].turnOnTime && schedule[2].turnOnTime.length > 0
                                                                     ? formatTime(schedule[2].turnOnTime)
                                                                     : 'Chưa đặt'}
                                                             </Text>
                                                         </TouchableOpacity>
-                                                        <Text style={[style.s16]}>Giờ tắt</Text>
-                                                        <TouchableOpacity onPress={() => showEndTimePicker(2)} style={[style.btn, { marginTop: 10 }]}>
+                                                        <Text style={[style.s16, {marginLeft: 10}]}>Giờ tắt</Text>
+                                                        <TouchableOpacity onPress={() => showEndTimePicker(2)} style={[style.btn, { marginTop: 5, marginLeft:10, width:90 }]}>
                                                             <Text style={[style.btntxt]}>
                                                                 {schedule[2].turnOffTime && schedule[2].turnOffTime.length > 0
                                                                     ? formatTime(schedule[2].turnOffTime)
@@ -681,15 +681,15 @@ export default function PotInfo() {
                                                     <Text style={[style.b16, { marginTop: 15 }]}>Camera</Text>
                                                     <View style={[style.list, { marginTop: 10 }]}>
                                                         <Text style={[style.s16]}>Giờ bật</Text>
-                                                        <TouchableOpacity onPress={() => showStartTimePicker(3)} style={[style.btn, { marginTop: 10 }]}>
+                                                        <TouchableOpacity onPress={() => showStartTimePicker(3)} style={[style.btn, { marginTop: 5, marginLeft:10, width:90 }]}>
                                                             <Text style={[style.btntxt]}>
                                                                 {schedule[3].turnOnTime && schedule[3].turnOnTime.length > 0
                                                                     ? formatTime(schedule[3].turnOnTime)
                                                                     : 'Chưa đặt'}
                                                             </Text>
                                                         </TouchableOpacity>
-                                                        <Text style={[style.s16]}>Giờ tắt</Text>
-                                                        <TouchableOpacity onPress={() => showEndTimePicker(3)} style={[style.btn, { marginTop: 10 }]}>
+                                                        <Text style={[style.s16, {marginLeft: 10}]}>Giờ tắt</Text>
+                                                        <TouchableOpacity onPress={() => showEndTimePicker(3)} style={[style.btn, { marginTop: 5, marginLeft:10, width:90 }]}>
                                                             <Text style={[style.btntxt]}>
                                                                 {schedule[3].turnOffTime && schedule[3].turnOffTime.length > 0
                                                                     ? formatTime(schedule[3].turnOffTime)

@@ -274,8 +274,8 @@ export default function Dashboard() {
                                 marginVertical: 8,
                                 borderRadius: 16,
                                 alignSelf: 'center',
-                                borderWidth: 1,
-                                borderColor: '#ccc',
+                                borderWidth: 2,
+                                borderColor: 'black',
                             }}
                             fromZero // Bắt đầu từ giá trị 0
 

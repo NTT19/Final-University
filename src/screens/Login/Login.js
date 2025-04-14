@@ -27,7 +27,7 @@ const height = Dimensions.get('screen').height
         try {
             const response = await loginApi.login(phone, password);  
            // const token = response.data.token; 
-            navigation.replace('Home'); 
+            navigation.replace('MyTabs'); 
         } catch (err) {
             setError('Đăng nhập thất bãi. Hãy kiểm tra lại mật khẩu!!!!.'); 
         } finally {

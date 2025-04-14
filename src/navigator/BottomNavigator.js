@@ -22,9 +22,22 @@ export default function MyTabs() {
     <Tab.Navigator
       screenOptions={{
         // BottomTabBarHeight:30,
-        tabBarStyle: { height: 70,paddingTop:10,paddingBottom:10, backgroundColor: Colors.bg, borderTopColor: Colors.bg, borderTopWidth: 0 },
+        tabBarStyle: { height: 70, paddingTop: 10, paddingBottom: 10, backgroundColor: Colors.bg, borderTopColor: Colors.bg, borderTopWidth: 0 },
         tabBarShowLabel: false,
       }}>
+
+      <Tab.Screen name="Dashboard" component={Dashboard}
+        options={{
+          tabBarShowLabel: true,
+          tabBarLabel: ({ focused, color }) => (
+            <Text style={[style.s15, { color: focused ? Colors.primary : Colors.icon }]}>Biểu đồ</Text>
+          ),
+          tabBarIcon: ({ focused, color }) => (
+            <Ionicons name="stats-chart" size={24} color={focused ? Colors.primary : Colors.icon} />
+          ),
+          headerShown: false,
+        }}
+      />
 
       <Tab.Screen name="PotInfo" component={PotInfo}
         options={{
@@ -40,32 +53,19 @@ export default function MyTabs() {
       />
 
 
-      <Tab.Screen name="Dashboard" component={Dashboard}
-          options={{
-            tabBarShowLabel: true,
-            tabBarLabel: ({ focused, color }) => (
-              <Text style={[style.s15, { color: focused ? Colors.primary : Colors.icon }]}>Biểu đồ</Text>
-            ),
-            tabBarIcon: ({ focused, color }) => (
-              <Ionicons name="stats-chart" size={24} color={focused ? Colors.primary : Colors.icon} />
-            ),
-            headerShown: false,
-          }}
-        />
-      
       <Tab.Screen name="Camera" component={Home}
-                options={{
-                  tabBarShowLabel: true,
-                  tabBarLabel: ({ focused, color }) => (
-                    <Text style={[style.s15, { color: focused ? Colors.primary : Colors.icon }]}>Camera</Text>
-                  ),
-                  tabBarIcon: ({ focused, color }) => (
-                    <Ionicons name="camera" size={24} color={focused ? Colors.primary : Colors.icon} />
-                  ),
-                  headerShown: false,
-                }}
-              />
-      
+        options={{
+          tabBarShowLabel: true,
+          tabBarLabel: ({ focused, color }) => (
+            <Text style={[style.s15, { color: focused ? Colors.primary : Colors.icon }]}>Camera</Text>
+          ),
+          tabBarIcon: ({ focused, color }) => (
+            <Ionicons name="camera" size={24} color={focused ? Colors.primary : Colors.icon} />
+          ),
+          headerShown: false,
+        }}
+      />
+
 
       {/* <Tab.Screen name="Store" component={Store}
         options={{
@@ -80,37 +80,37 @@ export default function MyTabs() {
           headerShown: false,
         }} /> */}
 
-<Tab.Screen name="Notification" component={Setting}
-  options={{
-    tabBarShowLabel: true,
-    tabBarLabel: ({ focused, color }) => (
-      <Text
-      style={[style.s15, { color: focused ? Colors.primary : Colors.icon }]}
-      numberOfLines={1} 
-      ellipsizeMode="tail"
-    >
-      Thông báo
-    </Text>
-    ),
-    tabBarIcon: ({ focused, color }) => (
-      <Ionicons name={focused ? "notifications" : "notifications-outline"} size={24} color={focused ? Colors.primary : Colors.icon} />
-    ),
-    headerShown: false,
-  }}
-/>
+      <Tab.Screen name="Notification" component={Setting}
+        options={{
+          tabBarShowLabel: true,
+          tabBarLabel: ({ focused, color }) => (
+            <Text
+              style={[style.s15, { color: focused ? Colors.primary : Colors.icon }]}
+              numberOfLines={1}
+              ellipsizeMode="tail"
+            >
+              Thông báo
+            </Text>
+          ),
+          tabBarIcon: ({ focused, color }) => (
+            <Ionicons name={focused ? "notifications" : "notifications-outline"} size={24} color={focused ? Colors.primary : Colors.icon} />
+          ),
+          headerShown: false,
+        }}
+      />
 
-<Tab.Screen name="Profile" component={Profile}
-  options={{
-    tabBarShowLabel: true,
-    tabBarLabel: ({ focused, color }) => (
-      <Text style={[style.s15, { color: focused ? Colors.primary : Colors.icon }]}>Hồ sơ</Text>
-    ),
-    tabBarIcon: ({ focused, color }) => (
-      <Ionicons name="person" size={24} color={focused ? Colors.primary : Colors.icon} />
-    ),
-    headerShown: false,
-  }}
-/>
+      <Tab.Screen name="Profile" component={Profile}
+        options={{
+          tabBarShowLabel: true,
+          tabBarLabel: ({ focused, color }) => (
+            <Text style={[style.s15, { color: focused ? Colors.primary : Colors.icon }]}>Hồ sơ</Text>
+          ),
+          tabBarIcon: ({ focused, color }) => (
+            <Ionicons name="person" size={24} color={focused ? Colors.primary : Colors.icon} />
+          ),
+          headerShown: false,
+        }}
+      />
 
 
     </Tab.Navigator>

@@ -25,7 +25,7 @@ export default function Home() {
                 const data = await sensorReadingApi.getSensorReading();
                 setSensorData(data);
             } catch (err) {
-                setError("Error fetching sensor data");
+                setError("Không tồn tại dữ liệu");
             } finally {
                 setLoading(false);
             }
