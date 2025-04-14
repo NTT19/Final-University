@@ -7,14 +7,14 @@ import { AppBar } from '@react-native-material/core';
 import Icon from 'react-native-vector-icons/Ionicons';
 import CheckBox from 'react-native-check-box';
 import loginApi from '../../api/loginApi';
-
+import Toast from 'react-native-toast-message';
 const width = Dimensions.get('screen').width
 const height = Dimensions.get('screen').height
 
     const Login= () => {
     const navigation = useNavigation();
     const [isSelected, setIsSelected] = useState(false)
-    const [phone, setPhone] = useState("");  // State cho phone
+    const [phone_number, setPhoneNumber] = useState("");  // State cho phone
     const [password, setPassword] = useState("");  // State cho password
     const [loading, setLoading] = useState(false);  // Trạng thái loading khi gọi API
     const [error, setError] = useState(null);  // Lỗi khi đăng nhập thất bại
@@ -25,15 +25,48 @@ const height = Dimensions.get('screen').height
         setError(null);
 
         try {
-            const response = await loginApi.login(phone, password);  
-           // const token = response.data.token; 
-            navigation.replace('MyTabs'); 
-        } catch (err) {
-            setError('Đăng nhập thất bãi. Hãy kiểm tra lại mật khẩu!!!!.'); 
-        } finally {
-            setLoading(false);
+            const payload = {
+                phone_number,
+                password,
+            };
+
+            console.log('Payload gửi lên API:', payload); // In ra payload để kiểm tra
+    
+            // Gửi yêu cầu trực tiếp đến API
+            const response = await fetch('https://plantify.info.vn/api/user/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(payload),
+            });
+    
+            const responseData = await response.json();
+    
+            if (response.ok) {
+                showToast('success', 'Đăng ký thành công!');
+                navigation.navigate('MyTabs'); // Chuyển hướng về màn hình đăng nhập
+            } else {
+                console.log('Phản hồi từ API:', responseData); // In ra phản hồi từ API
+                showToast('error', responseData.message || 'Đăng ký thất bại. Vui lòng thử lại!');
+            }
+        } catch (error) {
+            console.error('Lỗi khi đăng ký:', error);
+            showToast('error', 'Đã xảy ra lỗi. Vui lòng thử lại sau!');
         }
 };
+
+
+const showToast = (type, message) => {
+        Toast.show({
+            position: 'top',
+            topOffset: 80,
+            type: type,
+            text1: message,
+            visibilityTime: 1000,
+            text1Style: { fontSize: 20, fontWeight: 'bold', color: 'black' },
+        });
+    };
 
     return (
         <SafeAreaView style={[style.area, { backgroundColor: Colors.bg }]}>
@@ -68,8 +101,8 @@ const height = Dimensions.get('screen').height
                                 placeholderTextColor={Colors.icon}
                                 selectionColor={Colors.primary}
                                 style={[style.s16, { color: Colors.txt, flex: 1 }]}
-                                value={phone}
-                                onChangeText={setPhone}
+                                value={phone_number}
+                                onChangeText={setPhoneNumber}
                             />
                         </View>
 
@@ -122,6 +155,8 @@ const height = Dimensions.get('screen').height
                     </ScrollView>
                 </View>
             </KeyboardAvoidingView>
+                        {/* Toast Component */}
+                    <Toast />
         </SafeAreaView>
     )
 };

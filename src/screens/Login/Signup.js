@@ -30,10 +30,10 @@ export default function Signup() {
                 phoneNumber,
                 email,
                 password,
-                status: 'active', // Giá trị mặc định
-                role_id: 1, // Giá trị mặc định
+                status: 'active', 
+                role_id: 1, 
             };
-    
+
             console.log('Payload gửi lên API:', payload); // In ra payload để kiểm tra
     
             // Gửi yêu cầu trực tiếp đến API
