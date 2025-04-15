@@ -44,14 +44,14 @@ const height = Dimensions.get('screen').height
             const responseData = await response.json();
     
             if (response.ok) {
-                showToast('success', 'Đăng ký thành công!');
-                navigation.navigate('MyTabs'); // Chuyển hướng về màn hình đăng nhập
+                showToast('success', 'Đăng nhập thành công!');
+                navigation.navigate('Dashboard'); // Chuyển hướng về màn hình đăng nhập
             } else {
                 console.log('Phản hồi từ API:', responseData); // In ra phản hồi từ API
-                showToast('error', responseData.message || 'Đăng ký thất bại. Vui lòng thử lại!');
+                showToast('error', responseData.message || 'Đăng nhập thất bại. Vui lòng thử lại!');
             }
         } catch (error) {
-            console.error('Lỗi khi đăng ký:', error);
+            console.error('Lỗi khi đăng nhập:', error);
             showToast('error', 'Đã xảy ra lỗi. Vui lòng thử lại sau!');
         }
 };
