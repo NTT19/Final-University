@@ -45,7 +45,7 @@ const height = Dimensions.get('screen').height
     
             if (response.ok) {
                 showToast('success', 'Đăng nhập thành công!');
-                navigation.navigate('Dashboard'); // Chuyển hướng về màn hình đăng nhập
+                navigation.navigate('MyTabs'); // Chuyển hướng về màn hình đăng nhập
             } else {
                 console.log('Phản hồi từ API:', responseData); // In ra phản hồi từ API
                 showToast('error', responseData.message || 'Đăng nhập thất bại. Vui lòng thử lại!');

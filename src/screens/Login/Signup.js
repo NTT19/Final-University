@@ -107,7 +107,7 @@ export default function Signup() {
                                 onChangeText={setFullName}
                             />
                         </View>
-
+                                                                                        
                         <View style={[style.txtinput, { marginTop: 20, }]}>
                             <TextInput
                                 placeholder='Số điện thoại'
