@@ -22,12 +22,16 @@ export default function Home() {
         // Lấy dữ liệu từ API khi component được mount
         const fetchData = async () => {
             try {
-                const data = await sensorReadingApi.getSensorReading();
-                setSensorData(data);
+                const response = await fetch('https://plantify.info.vn/api/sensorReading');
+                if (!response.ok) {
+                    throw new Error('Không thể lấy dữ liệu từ API');
+                }
+                const data = await response.json(); 
+                setSensorData(data); 
             } catch (err) {
-                setError("Không tồn tại dữ liệu");
+                setError("Không tồn tại dữ liệu"); 
             } finally {
-                setLoading(false);
+                setLoading(false); 
             }
         };
 

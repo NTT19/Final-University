@@ -312,7 +312,7 @@ export default function PotInfo() {
                     <AppBar
                         elevation={0}
                         color={Colors.bg}
-                        leading={<TouchableOpacity onPress={() => navigation.navigate('Home')} >
+                        leading={<TouchableOpacity onPress={() => navigation.goBack()} >
                             <Icon name='arrow-back' size={24} color={Colors.txt} />
                         </TouchableOpacity>}
                         trailing={<HStack>

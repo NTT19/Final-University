@@ -39,7 +39,7 @@ export default function MyTabs() {
         }}
       />
 
-      <Tab.Screen name="PotInfo" component={PotInfo}
+      <Tab.Screen name="Home" component={Home}
         options={{
           tabBarShowLabel: true,
           tabBarLabel: ({ focused, color }) => (
