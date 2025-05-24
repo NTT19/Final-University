@@ -467,10 +467,10 @@ export default function PotInfo() {
                                 }}
                                 onPress={() => {
                                     // Xử lý sự kiện khi nhấn nút "Quan sát bằng camera"
-                                    console.log('Quan sát bằng camera');
+                                    navigation.navigate('MyTabs', { screen: 'Camera' });
                                 }}
                             >
-                                <Text style={[style.b14, { color: Colors.secondary }]}>Quan sát bằng camera</Text>
+                                <Text style={[style.s16, { fontWeight: 'bold', color: Colors.txt, textAlign: 'center' }, { color: Colors.secondary }]}>Quan sát bằng camera</Text>
                             </TouchableOpacity>
                         </View>
                     </ScrollView>
@@ -549,7 +549,7 @@ export default function PotInfo() {
                             flex: 1,
                             backgroundColor: '#000000aa',
                         }}>
-                            <View style={[style.modalcontainer, { backgroundColor: Colors.bg, width: width - 60, marginVertical: 50 }]}>
+                            <View style={[style.modalcontainer, { backgroundColor: Colors.bg, width: width - 20, marginVertical: 50 }]}>
                                 <View style={{ marginHorizontal: 15 }}>
 
                                     <View style={[style.list1]}>
@@ -708,7 +708,7 @@ export default function PotInfo() {
                                                     showToast('success', 'Lịch trình đã được cập nhật');
                                                 }}
                                                 style={{
-                                                    marginTop: 20,
+                                                    marginTop: 50,
                                                     backgroundColor: Colors.primary,
                                                     paddingVertical: 10,
                                                     borderRadius: 10,

@@ -11,8 +11,8 @@ const getSensorReading = async () => {
     }
 };
 
-getSensorReading()
-    .then((data) => console.log('Sensor Reading Data:', data)) 
-    .catch((error) => console.error("Error: ", error)); 
+// getSensorReading()
+//     .then((data) => console.log('Sensor Reading Data:', data)) 
+//     .catch((error) => console.error("Error: ", error)); 
 
 export default { getSensorReading };

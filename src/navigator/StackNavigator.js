@@ -41,7 +41,8 @@ import MyCart from '../screens/Store/MyCart';
 import Checkout from '../screens/Store/Checkout';
 import MyTabs from './BottomNavigator';
 import Dashboard from '../screens/DashBoard/DashBoard';
-
+import Camera from '../screens/Camera/Camera';
+import AuthLoadingScreen from './AuthLoadingScreen';
 const Stack = createNativeStackNavigator();
 
 export default function StackNavigator() {
@@ -49,7 +50,11 @@ export default function StackNavigator() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-
+      <Stack.Screen
+          name="AuthLoading"
+          component={AuthLoadingScreen}
+          options={{ headerShown: false }}
+        />
         <Stack.Screen
           name="Intro"
           component={Intro}
@@ -204,7 +209,10 @@ export default function StackNavigator() {
           name="DashBoard"
           component={Dashboard}
           options={{ headerShown: false }} />
-
+        <Stack.Screen
+          name="Camera"
+          component={Camera}
+          options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
 

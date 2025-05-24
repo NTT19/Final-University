@@ -3,6 +3,7 @@ import { View, Dimensions, Text, SafeAreaView, ScrollView, Platform } from 'reac
 import { LineChart, BarChart } from 'react-native-chart-kit';
 import style from '../../theme/style';
 import { Colors } from '../../theme/color';
+import LogoutButton from '../../navigator/LogoutButton';
 
 export default function Dashboard() {
     const [data, setData] = React.useState([1.86, 2.82, 2, 2.92, 6.45]); // Dữ liệu độ ẩm
@@ -73,7 +74,19 @@ export default function Dashboard() {
         <SafeAreaView style={[style.area, { backgroundColor: Colors.bg }]}>
             <ScrollView contentContainerStyle={{ paddingBottom: 20 }}>
                 <View style={[style.main, { marginTop: Platform.OS === 'ios' ? 10 : 10 }]}>
-                    <Text style={[style.apptitle]}>Dashboard</Text>
+                    <View
+                        style={{
+                            flexDirection: 'row',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                            paddingHorizontal: 1,
+                            height: 50,
+                          
+                        }}
+                    >
+                        <Text style={[style.apptitle]}>Dashboard</Text>
+                        <LogoutButton />
+                    </View>
                     <Text style={[style.r14, { color: Colors.icon, marginTop: 3 }]}>
                         Biểu đồ cảm biến độ ẩm đất
                     </Text>

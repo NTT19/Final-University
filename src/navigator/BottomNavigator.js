@@ -6,6 +6,7 @@ import Ionicons from "react-native-vector-icons/Ionicons"
 import { Colors } from '../theme/color';
 import Icon from 'react-native-vector-icons/FontAwesome5'
 import Home from '../screens/Home/Home';
+import Camera from '../screens/Camera/Camera';
 import Store from '../screens/Store/Store';
 import Setting from '../screens/Setting/Setting';
 import Profile from '../screens/Profile/Profile';
@@ -13,6 +14,7 @@ import Profile from '../screens/Profile/Profile';
 import style from '../theme/style';
 import PotInfo from '../screens/Home/PotInfo';
 import Dashboard from '../screens/DashBoard/DashBoard';
+import Recomendation from '../screens/Recomendation/Recomendation';
 
 const Tab = createBottomTabNavigator();
 
@@ -53,7 +55,7 @@ export default function MyTabs() {
       />
 
 
-      <Tab.Screen name="Camera" component={Home}
+      <Tab.Screen name="Camera" component={Camera}
         options={{
           tabBarShowLabel: true,
           tabBarLabel: ({ focused, color }) => (
@@ -80,7 +82,7 @@ export default function MyTabs() {
           headerShown: false,
         }} /> */}
 
-      <Tab.Screen name="Notification" component={Setting}
+      <Tab.Screen name="Notification" component={Recomendation}
         options={{
           tabBarShowLabel: true,
           tabBarLabel: ({ focused, color }) => (

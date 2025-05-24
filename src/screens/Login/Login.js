@@ -8,6 +8,8 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import CheckBox from 'react-native-check-box';
 import loginApi from '../../api/loginApi';
 import Toast from 'react-native-toast-message';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 const width = Dimensions.get('screen').width
 const height = Dimensions.get('screen').height
 
@@ -44,6 +46,13 @@ const height = Dimensions.get('screen').height
             const responseData = await response.json();
     
             if (response.ok) {
+                 // Lưu token và user data vào AsyncStorage
+        try {
+            await AsyncStorage.setItem('userToken', responseData.token);
+            await AsyncStorage.setItem('userData', JSON.stringify(responseData.user));
+          } catch (e) {
+            console.error('Lỗi lưu dữ liệu user:', e);
+          }
                 showToast('success', 'Đăng nhập thành công!');
                 navigation.navigate('MyTabs'); // Chuyển hướng về màn hình đăng nhập
             } else {
@@ -53,7 +62,9 @@ const height = Dimensions.get('screen').height
         } catch (error) {
             console.error('Lỗi khi đăng nhập:', error);
             showToast('error', 'Đã xảy ra lỗi. Vui lòng thử lại sau!');
-        }
+        }finally {
+            setLoading(false);
+          }
 };
 
 
@@ -103,6 +114,7 @@ const showToast = (type, message) => {
                                 style={[style.s16, { color: Colors.txt, flex: 1 }]}
                                 value={phone_number}
                                 onChangeText={setPhoneNumber}
+                                keyboardType="phone-pad"
                             />
                         </View>
 
@@ -113,6 +125,7 @@ const showToast = (type, message) => {
                                 style={[style.s16, { color: Colors.txt, flex: 1 }]}
                                 value={password}
                                 onChangeText={setPassword}
+                                secureTextEntry
                             />
                         </View>
 

@@ -28,7 +28,7 @@ export default function Profile() {
 
                     <ScrollView showsVerticalScrollIndicator={false} style={{marginTop:30}}>
 
-                        <TouchableOpacity /*  onPress={() => navigation.navigate('MyInfo')} */ style={[style.box,style.list,style.shadow,{backgroundColor:Colors.bg,margin:5 ,marginTop:15}]}>
+                        <TouchableOpacity   onPress={() => navigation.navigate('MyInfo')} style={[style.box,style.list,style.shadow,{backgroundColor:Colors.bg,margin:5 ,marginTop:15}]}>
                             <View style={[style.icon,{height:34,width:34,}]}>
                                 <Icon name='person-outline' size={18} color={Colors.primary}></Icon>
                             </View>

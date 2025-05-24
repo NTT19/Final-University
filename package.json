@@ -10,6 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^2.1.2",
     "@react-native-clipboard/clipboard": "^1.15.0",
     "@react-native-community/checkbox": "^0.5.17",
     "@react-native-community/datetimepicker": "^8.2.0",
@@ -33,6 +34,7 @@
     "react-native-gifted-charts": "^1.4.58",
     "react-native-indicators": "^0.17.0",
     "react-native-linear-gradient": "^2.8.3",
+    "react-native-modal": "^14.0.0-rc.1",
     "react-native-modal-datetime-picker": "^18.0.0",
     "react-native-otp-inputs": "^7.4.0",
     "react-native-pager-view": "^6.6.1",
@@ -45,7 +47,8 @@
     "react-native-svg": "^15.11.2",
     "react-native-tab-view": "^4.0.5",
     "react-native-toast-message": "^2.2.1",
-    "react-native-vector-icons": "^10.2.0"
+    "react-native-vector-icons": "^10.2.0",
+    "socket.io-client": "^4.8.1"
   },
   "devDependencies": {
     "@babel/core": "^7.26.0",
