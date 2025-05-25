@@ -13,7 +13,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const width = Dimensions.get('screen').width
 const height = Dimensions.get('screen').height
 
-    const Login= () => {
+const Login = () => {
     const navigation = useNavigation();
     const [isSelected, setIsSelected] = useState(false)
     const [phone_number, setPhoneNumber] = useState("");  // State cho phone
@@ -21,7 +21,7 @@ const height = Dimensions.get('screen').height
     const [loading, setLoading] = useState(false);  // Trạng thái loading khi gọi API
     const [error, setError] = useState(null);  // Lỗi khi đăng nhập thất bại
 
-
+    const [showPassword, setShowPassword] = useState(false);
     const handleLogin = async () => {
         setLoading(true);
         setError(null);
@@ -33,7 +33,7 @@ const height = Dimensions.get('screen').height
             };
 
             console.log('Payload gửi lên API:', payload); // In ra payload để kiểm tra
-    
+
             // Gửi yêu cầu trực tiếp đến API
             const response = await fetch('https://plantify.info.vn/api/user/login', {
                 method: 'POST',
@@ -42,33 +42,33 @@ const height = Dimensions.get('screen').height
                 },
                 body: JSON.stringify(payload),
             });
-    
+
             const responseData = await response.json();
-    
+
             if (response.ok) {
-                 // Lưu token và user data vào AsyncStorage
-        try {
-            await AsyncStorage.setItem('userToken', responseData.token);
-            await AsyncStorage.setItem('userData', JSON.stringify(responseData.user));
-          } catch (e) {
-            console.error('Lỗi lưu dữ liệu user:', e);
-          }
+                // Lưu token và user data vào AsyncStorage
+                try {
+                    await AsyncStorage.setItem('userToken', responseData.token);
+                    await AsyncStorage.setItem('userData', JSON.stringify(responseData.user));
+                } catch (e) {
+                    console.error('Lỗi lưu dữ liệu user:', e);
+                }
                 showToast('success', 'Đăng nhập thành công!');
                 navigation.navigate('MyTabs'); // Chuyển hướng về màn hình đăng nhập
             } else {
                 console.log('Phản hồi từ API:', responseData); // In ra phản hồi từ API
-                showToast('error', responseData.message || 'Đăng nhập thất bại. Vui lòng thử lại!');
+                showToast('error', responseData.message || 'Đăng nhập thất bại!!!');
             }
         } catch (error) {
             console.error('Lỗi khi đăng nhập:', error);
             showToast('error', 'Đã xảy ra lỗi. Vui lòng thử lại sau!');
-        }finally {
+        } finally {
             setLoading(false);
-          }
-};
+        }
+    };
 
 
-const showToast = (type, message) => {
+    const showToast = (type, message) => {
         Toast.show({
             position: 'top',
             topOffset: 80,
@@ -125,8 +125,16 @@ const showToast = (type, message) => {
                                 style={[style.s16, { color: Colors.txt, flex: 1 }]}
                                 value={password}
                                 onChangeText={setPassword}
-                                secureTextEntry
+                                secureTextEntry={!showPassword}
                             />
+                            <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+                                <Icon
+                                    name={showPassword ? 'eye-off' : 'eye'}
+                                    size={22}
+                                    color={Colors.icon}
+                                    style={{ marginLeft: 8 }}
+                                />
+                            </TouchableOpacity>
                         </View>
 
                         <View style={[style.list, { marginTop: 15 }]}>
@@ -142,12 +150,12 @@ const showToast = (type, message) => {
 
                         <TouchableOpacity onPress={handleLogin}
                             style={[style.btn, { marginTop: 50, height: 48 }]}>
-                                  {loading ? (
+                            {loading ? (
                                 <ActivityIndicator size="small" color={Colors.white} />
                             ) : (
-                            <Text style={style.btntxt}>Đăng nhập</Text>)}
+                                <Text style={style.btntxt}>Đăng nhập</Text>)}
                         </TouchableOpacity>
-                         {/* Error message */}
+                        {/* Error message */}
                         {error && <Text style={{ color: 'red', marginTop: 10, marginLeft: 30 }}>{error}</Text>}
 
 
@@ -168,8 +176,8 @@ const showToast = (type, message) => {
                     </ScrollView>
                 </View>
             </KeyboardAvoidingView>
-                        {/* Toast Component */}
-                    <Toast />
+            {/* Toast Component */}
+            <Toast />
         </SafeAreaView>
     )
 };

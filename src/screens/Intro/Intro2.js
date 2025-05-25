@@ -38,7 +38,7 @@ export default function Intro2() {
 
                         <Text style={[style.s14, { color: Colors.dis, textAlign: 'center' }]}>Bạn sẽ nhận biết được khi nào đèn LED của thiết bị bắt đầu nhấp nhảy màu trắng</Text>
 
-                        <TouchableOpacity onPress={() => navigation.navigate('Intro3')} style={[style.btn, { marginBottom: 20 }]}>
+                        <TouchableOpacity onPress={() => navigation.navigate('Intro6')} style={[style.btn, { marginBottom: 20 }]}>
                             <Text style={[style.btntxt]}>Tiếp tục</Text>
                         </TouchableOpacity>
 
