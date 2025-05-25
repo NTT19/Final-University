@@ -45,9 +45,33 @@ export default function MyInfo() {
 
     getUserData();
   }, []);
+  
+ const renderInfoCard = (iconName, label, value) => (
+    <View
+      style={{
+        backgroundColor: '#fff',
+        borderRadius: 12,
+        padding: 20,
+        marginBottom: 15,
+        shadowColor: '#000',
+        shadowOpacity: 0.1,
+        shadowRadius: 10,
+        shadowOffset: { width: 0, height: 4 },
+        elevation: 5,
+        flexDirection: 'row',
+        alignItems: 'center',
+      }}
+    >
+      <Icon name={iconName} size={28} color={Colors.primary} />
+      <View style={{ marginLeft: 16, flex: 1 }}>
+        <Text style={{ color: Colors.dis, fontSize: 14, marginBottom: 4 }}>{label}</Text>
+        <Text style={{ fontSize: 16, color: Colors.txt }}>{value}</Text>
+      </View>
+    </View>
+  );
 
   return (
-    <SafeAreaView style={[style.area, { backgroundColor: Colors.bg }]}>
+     <SafeAreaView style={[style.area, { backgroundColor: Colors.bg }]}>
       <KeyboardAvoidingView
         style={{ flex: 1 }}
         behavior={Platform.OS === 'ios' ? 'padding' : null}
@@ -57,39 +81,41 @@ export default function MyInfo() {
             color={Colors.bg}
             elevation={0}
             centerTitle={true}
-            title="My info"
-            titleStyle={[style.subtitle]}
+            title="Thông tin cá nhân"
+            titleStyle={[style.subtitle, { fontWeight: '700', fontSize: 22 }]}
             leading={
-              <TouchableOpacity onPress={() => navigation.goBack()}>
-                <Icon name="arrow-back" size={24} color={Colors.txt} />
+              <TouchableOpacity onPress={() => navigation.goBack()} style={{ padding: 8 }}>
+                <Icon name="arrow-back" size={28} color={Colors.txt} />
               </TouchableOpacity>
             }
           />
 
-          <ScrollView showsVerticalScrollIndicator={false} style={{ padding: 16 }}>
-            <Text style={[style.subtitle, { marginBottom: 10 }]}>Thông tin tài khoản</Text>
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+            style={{ paddingHorizontal: 20, marginTop: 12 }}
+            contentContainerStyle={{ paddingBottom: 30 }}
+          >
+            {/* Header greeting */}
+            <Text
+              style={{
+                fontSize: 20,
+                fontWeight: '600',
+                marginBottom: 20,
+                color: Colors.txt,
+                textAlign: 'center',
+              }}
+            >
+              Xin chào, {userInfo.fullName || 'Người dùng'}
+            </Text>
 
-            <View style={{ marginBottom: 12 }}>
-              <Text style={[style.s14, { color: Colors.dis }]}>Email:</Text>
-              <Text style={[style.s16, { color: Colors.txt }]}>{userInfo.email}</Text>
-            </View>
-
-            <View style={{ marginBottom: 12 }}>
-              <Text style={[style.s14, { color: Colors.dis }]}>Họ và tên:</Text>
-              <Text style={[style.s16, { color: Colors.txt }]}>{userInfo.fullName}</Text>
-            </View>
-
-            <View style={{ marginBottom: 12 }}>
-              <Text style={[style.s14, { color: Colors.dis }]}>Số điện thoại:</Text>
-              <Text style={[style.s16, { color: Colors.txt }]}>{userInfo.phoneNumber}</Text>
-            </View>
-
-            <View style={{ marginBottom: 12 }}>
-              <Text style={[style.s14, { color: Colors.dis }]}>Mật khẩu:</Text>
-              <Text style={[style.s16, { color: Colors.txt }]}>
-                {userInfo.password ? '********' : ''}
-              </Text>
-            </View>
+            {renderInfoCard('mail-outline', 'Email', userInfo.email)}
+            {renderInfoCard('person-outline', 'Họ và tên', userInfo.fullName)}
+            {renderInfoCard('call-outline', 'Số điện thoại', userInfo.phoneNumber)}
+            {renderInfoCard(
+              'lock-closed-outline',
+              'Mật khẩu',
+              userInfo.password ? '********' : ''
+            )}
           </ScrollView>
         </View>
       </KeyboardAvoidingView>

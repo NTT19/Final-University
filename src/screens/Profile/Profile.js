@@ -1,16 +1,33 @@
 import { View, Dimensions, Text, SafeAreaView, TextInput, StatusBar, TouchableOpacity, Image, ScrollView, KeyboardAvoidingView, ImageBackground } from 'react-native'
-import React, { useState, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import style from '../../theme/style';
 import { Colors } from '../../theme/color';
 import { useNavigation } from '@react-navigation/native';
 import { AppBar } from '@react-native-material/core';
 import Icon from 'react-native-vector-icons/Ionicons';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const width = Dimensions.get('screen').width
 const height = Dimensions.get('screen').height
 
 export default function Profile() {
     const navigation = useNavigation();
+       const [fullName, setFullName] = useState('');
+
+    useEffect(() => {
+        const loadUserData = async () => {
+            try {
+                const userStr = await AsyncStorage.getItem('userData');
+                if (userStr) {
+                    const user = JSON.parse(userStr);
+                    setFullName(user.fullName || '');
+                }
+            } catch (error) {
+                console.log('Lỗi lấy dữ liệu user:', error);
+            }
+        };
+        loadUserData();
+    }, []);
+
     return (
         <SafeAreaView style={[style.area, { backgroundColor: Colors.bg }]}>
             <KeyboardAvoidingView style={{ flex: 1 }}
@@ -23,7 +40,9 @@ export default function Profile() {
 
                    <Image source={require('../../../assets/image/profile.png')} resizeMode='stretch' style={{height:100,width:95,alignSelf:'center',marginTop:20}}></Image>
 
-                   <Text style={[style.subtitle,{textAlign:'center'}]}>NTT19</Text>
+                      <Text style={[style.subtitle, { textAlign: 'center' }]}>
+                        {fullName}
+                    </Text>
                    <Text style={[style.s16,{textAlign:'center',color:Colors.icon}]}>IOT</Text>
 
                     <ScrollView showsVerticalScrollIndicator={false} style={{marginTop:30}}>
