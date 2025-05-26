@@ -27,6 +27,7 @@ export default function Home() {
                     throw new Error('Không thể lấy dữ liệu từ API');
                 }
                 const data = await response.json(); 
+                console.log('Dữ liệu sensor:', data);  
                 setSensorData(data); 
             } catch (err) {
                 setError("Không tồn tại dữ liệu"); 

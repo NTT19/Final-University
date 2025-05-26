@@ -48,10 +48,10 @@ export default function PotInfo() {
 
 
 
-    const [currentDeviceIndex, setCurrentDeviceIndex] = useState(null); // Lưu trữ chỉ số thiết bị hiện tại
+    const [currentDeviceIndex, setCurrentDeviceIndex] = useState(null); 
 
     useEffect(() => {
-        fetchSchedule();  // Fetch schedule data when the component mounts
+        fetchSchedule();  
     }, []);
 
     const fetchSchedule = async () => {

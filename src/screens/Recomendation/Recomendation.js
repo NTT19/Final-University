@@ -4,8 +4,8 @@ import Toast from 'react-native-toast-message';
 import style from '../../theme/style';
 
 const Recomendation = () => {
-  const API_URL = 'https://plantify.info.vn/api/sensorReading'; // Thay bằng API thật
-  const PREDICT_API_URL = 'http://127.0.0.1:5000/predict'; // Thay bằng API thật
+  const API_URL = 'https://plantify.info.vn/api/sensorReading'; 
+  const PREDICT_API_URL = 'http://127.0.0.1:5000/predict'; 
   const [formData, setFormData] = useState({
     Nitrogen: '',
     Phosphorus: '',
@@ -35,12 +35,13 @@ const Recomendation = () => {
   useEffect(() => {
     const fetchSensorData = async () => {
       try {
-        const response = await fetch(API_URL);
+        const response = await fetch('https://plantify.info.vn/api/sensorReading');
         if (!response.ok) throw new Error('Lỗi khi lấy dữ liệu cảm biến');
 
         const sensorData = await response.json();
+        console.log('dữ liệu reading sensor:', sensorData);
         if (sensorData.length > 0) {
-          const latestData = sensorData[sensorData.length - 1]; // Lấy phần tử cuối cùng
+          const latestData = sensorData[sensorData.length - 1]; 
           setFormData({
             Nitrogen: latestData.nitrogen || '',
             Phosphorus: latestData.phosphorus || '',
@@ -139,7 +140,7 @@ const Recomendation = () => {
                   { label: '🧪 Phốt pho:', value: `${formData.Phosphorus} mg/kg` },
                   { label: '🧪 Kali:', value: `${formData.Potassium} mg/kg` },
                   { label: '🧪 pH đất:', value: formData.Ph },
-                  { label: '🌧 Lượng nước tưới:', value: `${formData.Rainfall} mm` },
+                 // { label: '🌧 Lượng nước tưới:', value: `${formData.Rainfall} L` },
                 ].map((item, index) => (
                   <View
                     key={index}
