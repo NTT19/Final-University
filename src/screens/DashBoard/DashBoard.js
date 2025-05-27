@@ -77,7 +77,7 @@ export default function Dashboard() {
 
                         }}
                     >
-                        <Text style={[style.apptitle]}>Dashboard</Text>
+                        <Text style={[style.apptitle]}>Biểu đồ</Text>
                         <LogoutButton />
                     </View>
                     <Text style={[style.r14, { color: Colors.txt, marginTop: 3 }]}>

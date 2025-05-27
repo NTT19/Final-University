@@ -1,22 +1,23 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, SafeAreaView, ScrollView, ActivityIndicator } from 'react-native';
+import { View, Text, Image, SafeAreaView, ScrollView, ActivityIndicator, Button, Alert } from 'react-native';
 import io from 'socket.io-client';
-import style from '../../theme/style';
 
 const Camera = () => {
   const [imageSrc, setImageSrc] = useState(null);
   const [label, setLabel] = useState('');
   const [advice, setAdvice] = useState('');
   const [loading, setLoading] = useState(true);
+  const [cameraOn, setCameraOn] = useState(false);
 
   useEffect(() => {
-    const socket = io('http://127.0.0.1:5000');
+    const socket = io('http://192.168.219.234:5000');
 
     socket.on('connect', () => {
       console.log('Connected to socket server');
     });
 
     socket.on('image', (data) => {
+      console.log('Received image event');
       setImageSrc(`data:image/jpeg;base64,${data.image}`);
       setLabel(data.label);
       setAdvice(data.advice);
@@ -27,15 +28,41 @@ const Camera = () => {
       console.log('Disconnected from socket server');
     });
 
+    socket.on('connect_error', (err) => {
+      console.error('Connection error:', err);
+    });
+
     return () => {
       socket.disconnect();
     };
   }, []);
 
+  const toggleCamera = async () => {
+    try {
+      const response = await fetch('http://192.168.219.234:5000/toggle_camera', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ status: !cameraOn }),
+      });
+      const data = await response.json();
+      setCameraOn(!cameraOn);
+      Alert.alert('Thông báo', data.message);
+      if (!cameraOn) setLoading(true);
+    } catch (error) {
+      Alert.alert('Lỗi', 'Không thể kết nối server');
+    }
+  };
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#F0F0F0' }}>
       <ScrollView contentContainerStyle={{ padding: 16, alignItems: 'center' }}>
-         <Text style={[style.apptitle]}>Giám sát lá cây</Text>
+        <Text style={{ fontSize: 24, fontWeight: '700', marginBottom: 16 }}>Giám sát lá cây</Text>
+
+        <Button
+          title={cameraOn ? 'Tắt Camera' : 'Bật Camera'}
+          onPress={toggleCamera}
+          color={cameraOn ? '#FF3B30' : '#007AFF'}
+        />
 
         <View
           style={{
