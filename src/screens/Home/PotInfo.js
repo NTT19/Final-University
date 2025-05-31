@@ -399,7 +399,7 @@ export default function PotInfo() {
                                         />
                                     </View>
                                     <View style={{ alignItems: 'center' }}>
-                                        <Text style={[style.b14]}>Tưới Nước</Text>
+                                        <Text style={[style.b14]}>Phun sương</Text>
                                         <Switch
                                             trackColor={{ false: Colors.disable, true: Colors.primary }}
                                             thumbColor={isWateringEnabled ? Colors.secondary : '#f4f3f4'}
@@ -409,7 +409,7 @@ export default function PotInfo() {
                                         />
                                     </View>
                                     <View style={{ alignItems: 'center' }}>
-                                        <Text style={[style.b14]}>Phun Sương</Text>
+                                        <Text style={[style.b14]}>Tưới nước</Text>
                                         <Switch
                                             trackColor={{ false: Colors.disable, true: Colors.primary }}
                                             thumbColor={isMistingEnabled ? Colors.secondary : '#f4f3f4'}

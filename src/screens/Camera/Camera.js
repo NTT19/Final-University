@@ -10,7 +10,7 @@ const Camera = () => {
   const [cameraOn, setCameraOn] = useState(false);
 
   useEffect(() => {
-    const socket = io('http://192.168.219.234:5000');
+    const socket = io('http://192.168.219.189:5000');
 
     socket.on('connect', () => {
       console.log('Connected to socket server');
@@ -29,7 +29,7 @@ const Camera = () => {
     });
 
     socket.on('connect_error', (err) => {
-      console.error('Connection error:', err);
+      //console.error('Connection error:', err);
     });
 
     return () => {
@@ -39,7 +39,7 @@ const Camera = () => {
 
   const toggleCamera = async () => {
     try {
-      const response = await fetch('http://192.168.219.234:5000/toggle_camera', {
+      const response = await fetch('http://192.168.219.189:5000/toggle_camera', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status: !cameraOn }),

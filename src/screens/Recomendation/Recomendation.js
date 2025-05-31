@@ -5,7 +5,7 @@ import style from '../../theme/style';
 
 const Recomendation = () => {
   const API_URL = 'https://plantify.info.vn/api/sensorReading'; 
-  const PREDICT_API_URL = 'http://192.168.219.234:5000/predict'; 
+  const PREDICT_API_URL = 'http://192.168.219.189:5001/predict'; 
   const [formData, setFormData] = useState({
     Nitrogen: '',
     Phosphorus: '',
@@ -40,23 +40,23 @@ const Recomendation = () => {
 
         const sensorData = await response.json();
         console.log('dữ liệu reading sensor:', sensorData);
-       if (sensorData.length > 0) {
-  const latestData = sensorData[sensorData.length - 1]; 
+     if (sensorData.length > 0) {
+  const latestData = sensorData[sensorData.length - 1];
 
-  // Kiểm tra Rainfall, nếu trống thì gán số random, ví dụ 10 - 50
+  
   const rainfallValue = latestData.waterMeter;
   const rainfall = (rainfallValue === '' || rainfallValue == null)
-    ? Math.floor(Math.random() * 41) + 10  // random từ 10 đến 50
+    ? Math.floor(Math.random() * 41) + 10  
     : rainfallValue;
 
   setFormData({
-    Nitrogen: latestData.nitrogen || '',
-    Phosphorus: latestData.phosphorus || '',
-    Potassium: latestData.potassium || '',
-    Temperature: latestData.temperature || '',
-    Humidity: latestData.humidity || '',
-    Ph: latestData.soilPH || '',
-    Rainfall: rainfall,
+    Nitrogen: latestData.nitrogen === '' || latestData.nitrogen == null ? 0 : latestData.nitrogen,
+    Phosphorus: latestData.phosphorus === '' || latestData.phosphorus == null ? 0 : latestData.phosphorus,
+    Potassium: latestData.potassium === '' || latestData.potassium == null ? 0 : latestData.potassium,
+    Temperature: latestData.temperature === '' || latestData.temperature == null ? 0 : latestData.temperature,
+    Humidity: latestData.humidity === '' || latestData.humidity == null ? 0 : latestData.humidity,
+    Ph: latestData.soilPH === '' || latestData.soilPH == null ? 0 : latestData.soilPH,
+    Rainfall: rainfall === '' || rainfall == null ? 0 : rainfall,
   });
   setLoadingSensor(false);
 }
@@ -68,7 +68,7 @@ const Recomendation = () => {
     };
 
     fetchSensorData();
-    const interval = setInterval(fetchSensorData, 50000);
+    const interval = setInterval(fetchSensorData, 20000);
     return () => clearInterval(interval);
   }, []);
 
@@ -77,7 +77,7 @@ const Recomendation = () => {
       try {
         setLoadingPredict(true);
         console.log('Sending formData to API:', formData);
-        const response = await fetch('http://192.168.219.234:5001/predict', {
+        const response = await fetch('http://192.168.219.189:5001/predict', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(formData),
@@ -148,7 +148,7 @@ const Recomendation = () => {
                   { label: '🧪 Phốt pho:', value: `${formData.Phosphorus} mg/kg` },
                   { label: '🧪 Kali:', value: `${formData.Potassium} mg/kg` },
                   { label: '🧪 pH đất:', value: formData.Ph },
-                 { label: '🌧 Lượng nước tưới:', value: `${formData.Rainfall} L` },
+                // { label: '🌧 Lượng nước tưới:', value: `${formData.Rainfall} L` },
                 ].map((item, index) => (
                   <View
                     key={index}
